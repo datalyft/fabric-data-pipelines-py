@@ -68,7 +68,9 @@ The value prop is simple: write Python, get the nested Fabric JSON. A landing tr
 
 === "Generated JSON (~200 lines)"
 
-    ~~~json {% include "snippets/before_after_pipeline.json" %} ~~~
+    ~~~json
+    {% include "snippets/before_after_pipeline.json" %}
+    ~~~
 
 Full runnable source: [`examples/landing_truncate_copy.py`](https://github.com/datalyft/fabric-data-pipelines/blob/main/examples/landing_truncate_copy.py).
 
