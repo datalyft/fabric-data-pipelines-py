@@ -1613,171 +1613,171 @@
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<p>~~~json {</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;activities&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Truncate_Landing_customers&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Script&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;dependsOn&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">        </span><span class="nt">&quot;policy&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.12:00:00&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;retry&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;retryIntervalInSeconds&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;secureOutput&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;secureInput&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;externalReferences&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;@pipeline().libraryVariables.Demo_ETL_Library_Landing&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;typeProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;database&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Landing&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TRUNCATE TABLE sales.customers&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Expression&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Query&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">          </span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;scriptBlockExecutionTimeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;02:00:00&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Copy_customers_to_Landing&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Copy&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;dependsOn&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;activity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Truncate_Landing_customers&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;dependencyConditions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">              </span><span class="s2">&quot;Succeeded&quot;</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;policy&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.12:00:00&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;retry&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;retryIntervalInSeconds&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;secureOutput&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;secureInput&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;typeProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SqlMISource&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;datasetSettings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AzureSqlMITable&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;annotations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">              </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">              </span><span class="nt">&quot;typeProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;database&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SourceDb&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="nt">&quot;externalReferences&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;@pipeline().libraryVariables.Demo_ETL_Library_SourceDb&quot;</span>
+<span class="w">              </span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;sqlReaderQuery&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SELECT\n   CAST([customer_id] AS NVARCHAR (12)) AS [customer_id]\n   , [region]\n   , [segment]\n   , [updated_at]\nFROM [dbo].[customers];\n&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;partitionOption&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;None&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;sink&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SqlMISink&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;datasetSettings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AzureSqlMITable&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;annotations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">              </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">              </span><span class="nt">&quot;typeProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;database&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Landing&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;customers&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sales&quot;</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="nt">&quot;externalReferences&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;@pipeline().libraryVariables.Demo_ETL_Library_Landing&quot;</span>
+<span class="w">              </span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;writeBehavior&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;insert&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;sqlWriterUseTableLock&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;translator&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TabularTranslator&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;customer_id&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;String&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;physicalType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nvarchar&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;sink&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;customer_id&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;String&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;physicalType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nvarchar&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;region&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;String&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;physicalType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nvarchar&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;sink&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;region&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;String&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;physicalType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nvarchar&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;segment&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;String&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;physicalType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nvarchar&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;sink&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;segment&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;String&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;physicalType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nvarchar&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;updated_at&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;String&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;physicalType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nvarchar&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;sink&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;updated_at&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;String&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">&quot;physicalType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nvarchar&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">              </span><span class="p">}</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;typeConversion&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;typeConversionSettings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;allowDataTruncation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;treatBooleanAsNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;enableStaging&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Truncate Landing.sales.customers, then load a typed subset from SourceDb.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;libraryVariables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;Demo_ETL_Library_Landing&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;String&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;variableName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Landing&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;libraryName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Demo_ETL_Library&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;Demo_ETL_Library_SourceDb&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;String&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;variableName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SourceDb&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;libraryName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Demo_ETL_Library&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 </div>
 </div>
 </div>
-<p>json   "properties": {
-json     "activities": [
-json       {
-json         "name": "Truncate_Landing_customers",
-json         "type": "Script",
-json         "dependsOn": [],
-json         "policy": {
-json           "timeout": "0.12:00:00",
-json           "retry": 0,
-json           "retryIntervalInSeconds": 30,
-json           "secureOutput": false,
-json           "secureInput": false
-json         },
-json         "externalReferences": {
-json           "connection": "@pipeline().libraryVariables.Demo_ETL_Library_Landing"
-json         },
-json         "typeProperties": {
-json           "database": "Landing",
-json           "scripts": [
-json             {
-json               "text": {
-json                 "value": "TRUNCATE TABLE sales.customers",
-json                 "type": "Expression"
-json               },
-json               "type": "Query"
-json             }
-json           ],
-json           "scriptBlockExecutionTimeout": "02:00:00"
-json         }
-json       },
-json       {
-json         "name": "Copy_customers_to_Landing",
-json         "type": "Copy",
-json         "dependsOn": [
-json           {
-json             "activity": "Truncate_Landing_customers",
-json             "dependencyConditions": [
-json               "Succeeded"
-json             ]
-json           }
-json         ],
-json         "policy": {
-json           "timeout": "0.12:00:00",
-json           "retry": 0,
-json           "retryIntervalInSeconds": 30,
-json           "secureOutput": false,
-json           "secureInput": false
-json         },
-json         "typeProperties": {
-json           "source": {
-json             "type": "SqlMISource",
-json             "datasetSettings": {
-json               "type": "AzureSqlMITable",
-json               "annotations": [],
-json               "schema": [],
-json               "typeProperties": {
-json                 "database": "SourceDb"
-json               },
-json               "externalReferences": {
-json                 "connection": "@pipeline().libraryVariables.Demo_ETL_Library_SourceDb"
-json               }
-json             },
-json             "sqlReaderQuery": "SELECT\n   CAST([customer_id] AS NVARCHAR (12)) AS [customer_id]\n   , [region]\n   , [segment]\n   , [updated_at]\nFROM [dbo].[customers];\n",
-json             "partitionOption": "None"
-json           },
-json           "sink": {
-json             "type": "SqlMISink",
-json             "datasetSettings": {
-json               "type": "AzureSqlMITable",
-json               "annotations": [],
-json               "schema": [],
-json               "typeProperties": {
-json                 "database": "Landing",
-json                 "table": "customers",
-json                 "schema": "sales"
-json               },
-json               "externalReferences": {
-json                 "connection": "@pipeline().libraryVariables.Demo_ETL_Library_Landing"
-json               }
-json             },
-json             "writeBehavior": "insert",
-json             "sqlWriterUseTableLock": true
-json           },
-json           "translator": {
-json             "type": "TabularTranslator",
-json             "mappings": [
-json               {
-json                 "source": {
-json                   "name": "customer_id",
-json                   "type": "String",
-json                   "physicalType": "nvarchar"
-json                 },
-json                 "sink": {
-json                   "name": "customer_id",
-json                   "type": "String",
-json                   "physicalType": "nvarchar"
-json                 }
-json               },
-json               {
-json                 "source": {
-json                   "name": "region",
-json                   "type": "String",
-json                   "physicalType": "nvarchar"
-json                 },
-json                 "sink": {
-json                   "name": "region",
-json                   "type": "String",
-json                   "physicalType": "nvarchar"
-json                 }
-json               },
-json               {
-json                 "source": {
-json                   "name": "segment",
-json                   "type": "String",
-json                   "physicalType": "nvarchar"
-json                 },
-json                 "sink": {
-json                   "name": "segment",
-json                   "type": "String",
-json                   "physicalType": "nvarchar"
-json                 }
-json               },
-json               {
-json                 "source": {
-json                   "name": "updated_at",
-json                   "type": "String",
-json                   "physicalType": "nvarchar"
-json                 },
-json                 "sink": {
-json                   "name": "updated_at",
-json                   "type": "String",
-json                   "physicalType": "nvarchar"
-json                 }
-json               }
-json             ],
-json             "typeConversion": true,
-json             "typeConversionSettings": {
-json               "allowDataTruncation": true,
-json               "treatBooleanAsNumber": false
-json             }
-json           },
-json           "enableStaging": false
-json         }
-json       }
-json     ],
-json     "description": "Truncate Landing.sales.customers, then load a typed subset from SourceDb.",
-json     "libraryVariables": {
-json       "Demo_ETL_Library_Landing": {
-json         "type": "String",
-json         "variableName": "Landing",
-json         "libraryName": "Demo_ETL_Library"
-json       },
-json       "Demo_ETL_Library_SourceDb": {
-json         "type": "String",
-json         "variableName": "SourceDb",
-json         "libraryName": "Demo_ETL_Library"
-json       }
-json     }
-json   }
-json }
- ~~~</p>
 <p>Full runnable source: <a href="https://github.com/datalyft/fabric-data-pipelines/blob/main/examples/landing_truncate_copy.py"><code>examples/landing_truncate_copy.py</code></a>.</p>
 <h2 id="what-you-can-build">What you can build<a class="headerlink" href="#what-you-can-build" title="Permanent link">&para;</a></h2>
 <p>This package supports both simple and production-style workflows:</p>
