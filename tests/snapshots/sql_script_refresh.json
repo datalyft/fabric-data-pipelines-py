@@ -1,0 +1,70 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "FillRegionsTable",
+        "type": "Script",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "externalReferences": {
+          "connection": "@pipeline().libraryVariables.Demo_ETL_Library_SourceDb"
+        },
+        "typeProperties": {
+          "database": "SourceDb",
+          "scripts": [
+            {
+              "text": {
+                "value": "BEGIN TRAN;\nDELETE FROM [analytics].[region_totals];\nINSERT INTO [analytics].[region_totals] ([region], [total])\nSELECT [region], SUM([amount]) FROM [dbo].[orders] GROUP BY [region];\nCOMMIT;",
+                "type": "Expression"
+              },
+              "type": "NonQuery"
+            }
+          ],
+          "scriptBlockExecutionTimeout": "02:00:00"
+        }
+      },
+      {
+        "name": "FillProductsTable",
+        "type": "Script",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "externalReferences": {
+          "connection": "@pipeline().libraryVariables.Demo_ETL_Library_SourceDb"
+        },
+        "typeProperties": {
+          "database": "SourceDb",
+          "scripts": [
+            {
+              "text": {
+                "value": "BEGIN TRAN;\nDELETE FROM [analytics].[product_totals];\nINSERT INTO [analytics].[product_totals] ([product_id], [total])\nSELECT [product_id], SUM([amount]) FROM [dbo].[orders] GROUP BY [product_id];\nCOMMIT;",
+                "type": "Expression"
+              },
+              "type": "NonQuery"
+            }
+          ],
+          "scriptBlockExecutionTimeout": "02:00:00"
+        }
+      }
+    ],
+    "libraryVariables": {
+      "Demo_ETL_Library_SourceDb": {
+        "type": "String",
+        "variableName": "SourceDb",
+        "libraryName": "Demo_ETL_Library"
+      }
+    },
+    "concurrency": 1
+  }
+}

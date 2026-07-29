@@ -1,0 +1,207 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Until_TryAcquireLock",
+        "type": "Until",
+        "dependsOn": [],
+        "typeProperties": {
+          "expression": {
+            "value": "@or(equals(activity('Guard_TryAcquireLock').output.resultSets[0].rows[0].Acquired, true),equals(activity('Guard_TryAcquireLock').output.resultSets[0].rows[0].Acquired, 1))",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "name": "Guard_TryAcquireLock",
+              "type": "Script",
+              "dependsOn": [],
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureOutput": false,
+                "secureInput": false
+              },
+              "externalReferences": {
+                "connection": "@pipeline().libraryVariables.Demo_ETL_Library_SourceDb"
+              },
+              "typeProperties": {
+                "database": "JobControl",
+                "scripts": [
+                  {
+                    "text": {
+                      "value": "EXEC [dbo].[usp_TryAcquireJobLock]\n  @ResourceName = N'Sales_ETL_History',\n  @RunId = N'@{pipeline().RunId}',\n  @PipelineName = N'@{pipeline().Pipeline}',\n  @LoadType = N'full',\n  @LeaseMinutes = 720;",
+                      "type": "Expression"
+                    },
+                    "type": "Query"
+                  }
+                ],
+                "scriptBlockExecutionTimeout": "02:00:00"
+              }
+            },
+            {
+              "name": "If_LockNotAcquired",
+              "type": "IfCondition",
+              "dependsOn": [
+                {
+                  "activity": "Guard_TryAcquireLock",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ],
+              "typeProperties": {
+                "expression": {
+                  "value": "@not(or(equals(activity('Guard_TryAcquireLock').output.resultSets[0].rows[0].Acquired, true),equals(activity('Guard_TryAcquireLock').output.resultSets[0].rows[0].Acquired, 1)))",
+                  "type": "Expression"
+                },
+                "ifTrueActivities": [
+                  {
+                    "name": "Wait_For_Lock",
+                    "type": "Wait",
+                    "dependsOn": [],
+                    "typeProperties": {
+                      "waitTimeInSeconds": 60
+                    }
+                  }
+                ],
+                "ifFalseActivities": []
+              }
+            }
+          ],
+          "timeout": "02:00:00"
+        }
+      },
+      {
+        "name": "If_RunLoads",
+        "type": "IfCondition",
+        "dependsOn": [
+          {
+            "activity": "Until_TryAcquireLock",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "typeProperties": {
+          "expression": {
+            "value": "@bool(true)",
+            "type": "Expression"
+          },
+          "ifTrueActivities": [
+            {
+              "name": "Invoke_History_Full_Load",
+              "type": "ExecutePipeline",
+              "dependsOn": [],
+              "policy": {
+                "secureInput": false
+              },
+              "typeProperties": {
+                "pipeline": {
+                  "referenceName": "11111111-1111-1111-1111-111111111111",
+                  "type": "PipelineReference"
+                },
+                "parameters": {},
+                "waitOnCompletion": true
+              }
+            },
+            {
+              "name": "Invoke_Landing_Load",
+              "type": "ExecutePipeline",
+              "dependsOn": [
+                {
+                  "activity": "Invoke_History_Full_Load",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ],
+              "policy": {
+                "secureInput": false
+              },
+              "typeProperties": {
+                "pipeline": {
+                  "referenceName": "22222222-2222-2222-2222-222222222222",
+                  "type": "PipelineReference"
+                },
+                "parameters": {
+                  "full_load": 1
+                },
+                "waitOnCompletion": true
+              }
+            },
+            {
+              "name": "Invoke_Staging_Load",
+              "type": "ExecutePipeline",
+              "dependsOn": [
+                {
+                  "activity": "Invoke_Landing_Load",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ],
+              "policy": {
+                "secureInput": false
+              },
+              "typeProperties": {
+                "pipeline": {
+                  "referenceName": "33333333-3333-3333-3333-333333333333",
+                  "type": "PipelineReference"
+                },
+                "parameters": {
+                  "full_load": 1
+                },
+                "waitOnCompletion": true
+              }
+            }
+          ],
+          "ifFalseActivities": []
+        }
+      },
+      {
+        "name": "Guard_ReleaseLock",
+        "type": "Script",
+        "dependsOn": [
+          {
+            "activity": "If_RunLoads",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "externalReferences": {
+          "connection": "@pipeline().libraryVariables.Demo_ETL_Library_SourceDb"
+        },
+        "typeProperties": {
+          "database": "JobControl",
+          "scripts": [
+            {
+              "text": {
+                "value": "EXEC [dbo].[usp_ReleaseJobLock]\n  @ResourceName = N'Sales_ETL_History',\n  @RunId = N'@{pipeline().RunId}';",
+                "type": "Expression"
+              },
+              "type": "NonQuery"
+            }
+          ],
+          "scriptBlockExecutionTimeout": "02:00:00"
+        }
+      }
+    ],
+    "libraryVariables": {
+      "Demo_ETL_Library_SourceDb": {
+        "type": "String",
+        "variableName": "SourceDb",
+        "libraryName": "Demo_ETL_Library"
+      }
+    },
+    "concurrency": 1
+  }
+}

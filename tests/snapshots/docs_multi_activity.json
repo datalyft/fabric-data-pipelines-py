@@ -1,0 +1,124 @@
+{
+  "properties": {
+    "description": "Data pipeline with multiple activity types demonstrating different typeProperties",
+    "activities": [
+      {
+        "name": "Notebook1",
+        "type": "TridentNotebook",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "notebookId": "00000000-0000-0000-0000-000000000002",
+          "workspaceId": "00000000-0000-0000-0000-000000000001"
+        }
+      },
+      {
+        "name": "Get Metadata1",
+        "type": "GetMetadata",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "fieldList": [
+            "columnCount"
+          ],
+          "datasetSettings": {
+            "annotations": [],
+            "linkedService": {
+              "name": "LakehouseGitArtifactW1",
+              "properties": {
+                "annotations": [],
+                "type": "Lakehouse",
+                "typeProperties": {
+                  "workspaceId": "00000000-0000-0000-0000-000000000001",
+                  "artifactId": "00000000-0000-0000-0000-000000000003",
+                  "rootFolder": "Tables"
+                }
+              }
+            },
+            "type": "LakehouseTable",
+            "schema": [],
+            "typeProperties": {
+              "table": "Lh1"
+            }
+          }
+        }
+      },
+      {
+        "name": "Lookup1",
+        "type": "Lookup",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "LakehouseTableSource"
+          },
+          "datasetSettings": {
+            "annotations": [],
+            "linkedService": {
+              "name": "LakehouseGitArtifactW1",
+              "properties": {
+                "annotations": [],
+                "type": "Lakehouse",
+                "typeProperties": {
+                  "workspaceId": "00000000-0000-0000-0000-000000000001",
+                  "artifactId": "00000000-0000-0000-0000-000000000003",
+                  "rootFolder": "Tables"
+                }
+              }
+            },
+            "type": "LakehouseTable",
+            "schema": [],
+            "typeProperties": {
+              "table": "lh2"
+            }
+          }
+        }
+      },
+      {
+        "name": "PBISemanticModelRefresh1",
+        "type": "PBISemanticModelRefresh",
+        "dependsOn": [],
+        "userProperties": [],
+        "typeProperties": {
+          "method": "POST",
+          "groupId": "00000000-0000-0000-0000-000000000001",
+          "datasetId": "00000000-0000-0000-0000-000000000004",
+          "type": "Full",
+          "commitMode": "transactional",
+          "maxParallelism": 2,
+          "retryCount": 1,
+          "waitOnCompletion": true,
+          "operationType": "RefreshDataset"
+        },
+        "externalReferences": {
+          "connection": "00000000-0000-0000-0000-000000000005"
+        },
+        "policy": {
+          "timeout": "7.00:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        }
+      }
+    ]
+  }
+}

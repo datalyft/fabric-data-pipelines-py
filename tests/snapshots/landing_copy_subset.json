@@ -1,0 +1,160 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Truncate_customers",
+        "type": "Script",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "externalReferences": {
+          "connection": "@pipeline().libraryVariables.Demo_ETL_Library_Landing"
+        },
+        "typeProperties": {
+          "database": "Landing",
+          "scripts": [
+            {
+              "text": {
+                "value": "TRUNCATE TABLE sales.customers",
+                "type": "Expression"
+              },
+              "type": "Query"
+            }
+          ],
+          "scriptBlockExecutionTimeout": "02:00:00"
+        }
+      },
+      {
+        "name": "Copy_customers",
+        "type": "Copy",
+        "dependsOn": [
+          {
+            "activity": "Truncate_customers",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "SqlMISource",
+            "datasetSettings": {
+              "type": "AzureSqlMITable",
+              "annotations": [],
+              "schema": [],
+              "typeProperties": {
+                "database": "SourceDb"
+              },
+              "externalReferences": {
+                "connection": "@pipeline().libraryVariables.Demo_ETL_Library_SourceDb"
+              }
+            },
+            "sqlReaderQuery": "SELECT\n   CAST([customer_id] AS NVARCHAR (12)) AS [customer_id]\n   , [region]\n   , [segment]\n   , [updated_at]\nFROM [dbo].[customers];",
+            "partitionOption": "None"
+          },
+          "sink": {
+            "type": "SqlMISink",
+            "datasetSettings": {
+              "type": "AzureSqlMITable",
+              "annotations": [],
+              "schema": [],
+              "typeProperties": {
+                "database": "Landing",
+                "table": "customers",
+                "schema": "sales"
+              },
+              "externalReferences": {
+                "connection": "@pipeline().libraryVariables.Demo_ETL_Library_Landing"
+              }
+            },
+            "writeBehavior": "insert",
+            "sqlWriterUseTableLock": true
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "customer_id",
+                  "type": "String",
+                  "physicalType": "nvarchar"
+                },
+                "sink": {
+                  "name": "customer_id",
+                  "type": "String",
+                  "physicalType": "nvarchar"
+                }
+              },
+              {
+                "source": {
+                  "name": "region",
+                  "type": "String",
+                  "physicalType": "nvarchar"
+                },
+                "sink": {
+                  "name": "region",
+                  "type": "String",
+                  "physicalType": "nvarchar"
+                }
+              },
+              {
+                "source": {
+                  "name": "segment",
+                  "type": "String",
+                  "physicalType": "nvarchar"
+                },
+                "sink": {
+                  "name": "segment",
+                  "type": "String",
+                  "physicalType": "nvarchar"
+                }
+              },
+              {
+                "source": {
+                  "name": "updated_at",
+                  "type": "String",
+                  "physicalType": "nvarchar"
+                },
+                "sink": {
+                  "name": "updated_at",
+                  "type": "String",
+                  "physicalType": "nvarchar"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        }
+      }
+    ],
+    "libraryVariables": {
+      "Demo_ETL_Library_Landing": {
+        "type": "String",
+        "variableName": "Landing",
+        "libraryName": "Demo_ETL_Library"
+      },
+      "Demo_ETL_Library_SourceDb": {
+        "type": "String",
+        "variableName": "SourceDb",
+        "libraryName": "Demo_ETL_Library"
+      }
+    }
+  }
+}

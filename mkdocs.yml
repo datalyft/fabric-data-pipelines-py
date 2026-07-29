@@ -1,0 +1,84 @@
+site_name: fabric-data-pipelines
+site_description: Author Microsoft Fabric data pipelines as typed Python code.
+site_url: https://fabric-data-pipelines.datalyft.io/
+repo_url: https://github.com/datalyft/fabric-data-pipelines
+repo_name: datalyft/fabric-data-pipelines
+docs_dir: docs
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+  icon:
+    repo: fontawesome/brands/github
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+plugins:
+  - search
+  - include-markdown
+  - mkdocstrings:
+      handlers:
+        python:
+          paths:
+            - src
+          options:
+            show_root_heading: true
+            show_root_toc_entry: true
+            separate_signature: true
+            show_signature_annotations: true
+            show_source: false
+            members_order: source
+            filters:
+              - "!^_"
+extra:
+  version:
+    provider: mike
+nav:
+  - Overview: index.md
+  - Getting Started: getting-started.md
+  - Concepts:
+      - Activities: concepts/activities.md
+      - Dependencies: concepts/dependencies.md
+      - Expressions: concepts/expressions.md
+      - Exporting: concepts/exporting.md
+  - Guides:
+      - Scheduling: guides/scheduling.md
+      - ETL Patterns: guides/etl-patterns.md
+      - Deploy to Fabric: guides/deploy.md
+      - CI with GitHub Actions: guides/ci.md
+      - How this compares: guides/positioning.md
+  - Roadmap: roadmap.md
+  - Reference:
+      - Overview: reference/index.md
+      - Pipeline: reference/pipeline.md
+      - Activities:
+          - Base: reference/activities/base.md
+          - Control Flow: reference/activities/control.md
+          - Data Movement: reference/activities/data-movement.md
+          - Execution: reference/activities/execution.md
+          - Variables: reference/activities/variables.md
+          - Raw: reference/activities/raw.md
+      - Expressions: reference/expressions.md
+      - Schedules: reference/schedules.md
+      - Export: reference/export.md
+      - Errors: reference/errors.md
+      - Changelog: reference/changelog.md

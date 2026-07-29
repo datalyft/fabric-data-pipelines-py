@@ -1,0 +1,18 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - python -m pip install --upgrade pip
+        - python -m pip install uv
+        - uv sync --group docs
+    build:
+      commands:
+        - uv run mkdocs build --strict
+  artifacts:
+    baseDirectory: site
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - .venv/**/*

@@ -1,0 +1,102 @@
+[project]
+name = "fabric-data-pipelines"
+version = "0.2.1"
+description = "Define Microsoft Fabric Data Pipelines as Code"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "Datalyft", email = "bas@datalyft.io" },
+]
+keywords = [
+    "microsoft-fabric",
+    "data-pipelines",
+    "etl",
+    "pydantic",
+]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+dependencies = [
+    "pydantic>=2.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/datalyft/fabric-data-pipelines"
+Repository = "https://github.com/datalyft/fabric-data-pipelines"
+Issues = "https://github.com/datalyft/fabric-data-pipelines/issues"
+Changelog = "https://github.com/datalyft/fabric-data-pipelines/blob/main/CHANGELOG.md"
+Documentation = "https://fabric-data-pipelines.datalyft.io"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.9",
+    "mypy>=1.14",
+]
+docs = [
+    "mike>=2.1",
+    "mkdocs>=1.6",
+    "mkdocs-include-markdown-plugin>=7.1",
+    "mkdocs-material>=9.6",
+    "mkdocstrings[python]>=0.30",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fabric_data_pipelines"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+    "/examples",
+    "/README.md",
+    "/LICENSE",
+    "/CHANGELOG.md",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+packages = ["fabric_data_pipelines"]
+mypy_path = "src"
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+src = ["src", "tests", "examples"]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "UP",
+    "B",
+    "SIM",
+    "RUF",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["fabric_data_pipelines"]

@@ -1,0 +1,102 @@
+{
+  "properties": {
+    "description": "Kitchen-sink control flow covering ForEach, Switch, Fail, Dataflow, StoredProcedure",
+    "activities": [
+      {
+        "name": "for_each_table",
+        "type": "ForEach",
+        "dependsOn": [],
+        "typeProperties": {
+          "items": {
+            "value": "@pipeline().parameters.tables",
+            "type": "Expression"
+          },
+          "isSequential": true,
+          "activities": [
+            {
+              "name": "refresh_one",
+              "type": "RefreshDataFlow",
+              "dependsOn": [],
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureOutput": false,
+                "secureInput": false
+              },
+              "typeProperties": {
+                "dataflowId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "workspaceId": "00000000-0000-0000-0000-000000000001"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "by_mode",
+        "type": "Switch",
+        "dependsOn": [
+          {
+            "activity": "for_each_table",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "typeProperties": {
+          "on": {
+            "value": "@pipeline().parameters.mode",
+            "type": "Expression"
+          },
+          "cases": [
+            {
+              "value": "full",
+              "activities": [
+                {
+                  "name": "run_merge",
+                  "type": "SqlServerStoredProcedure",
+                  "dependsOn": [],
+                  "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                  },
+                  "externalReferences": {
+                    "connection": "11111111-2222-3333-4444-555555555555"
+                  },
+                  "typeProperties": {
+                    "storedProcedureName": "dbo.usp_MergeSales",
+                    "database": "Warehouse"
+                  }
+                }
+              ]
+            }
+          ],
+          "defaultActivities": [
+            {
+              "name": "bad_mode",
+              "type": "Fail",
+              "dependsOn": [],
+              "typeProperties": {
+                "message": "Unknown mode",
+                "errorCode": "BadMode"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parameters": {
+      "tables": {
+        "type": "Array",
+        "defaultValue": []
+      },
+      "mode": {
+        "type": "String",
+        "defaultValue": "full"
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+name: Publish Docs
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Serialize publishes so concurrent main + tag pushes do not race on docs-site.
+concurrency:
+  group: docs-site
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.13"
+          enable-cache: true
+
+      - name: Sync docs dependencies
+        run: uv sync --group docs
+
+      - name: Configure git author
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch docs-site branch
+        run: git fetch origin docs-site:docs-site || true
+
+      - name: Publish latest docs from main
+        if: github.ref == 'refs/heads/main'
+        run: |
+          # Amplify/S3 does not follow git symlinks. Use redirect aliases so
+          # /stable/ sends browsers to /0.1.0/ (where CSS and assets live).
+          uv run mike deploy --branch docs-site --alias-type=redirect latest --update-aliases --push
+
+          # Rematerialize an existing stable alias as a redirect (fixes leftover symlinks).
+          if uv run mike list --branch docs-site --json stable >/tmp/stable.json 2>/dev/null; then
+            TARGET="$(python -c 'import json; print(json.load(open("/tmp/stable.json"))["version"])')"
+            uv run mike alias --branch docs-site --alias-type=redirect --update-aliases "$TARGET" stable --push
+          fi
+
+          uv run mike set-default --branch docs-site latest --push
+
+      - name: Publish versioned docs from release tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          DOCS_VERSION: ${{ github.ref_name }}
+        run: |
+          VERSION="${DOCS_VERSION#v}"
+          uv run mike deploy --branch docs-site --alias-type=redirect "${VERSION}" stable --update-aliases --push
+          # Keep the site root on latest so Amplify never depends on an alias path.
+          uv run mike set-default --branch docs-site latest --push

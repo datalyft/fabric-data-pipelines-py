@@ -1,0 +1,46 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+*.pyo
+build/
+dist/
+wheels/
+*.egg-info
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+
+# Type checkers / linters
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Coverage / test artifacts
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# uv
+# Keep uv.lock out of the library repo; consumers resolve fresh.
+uv.lock
+
+# Packaging artifacts
+*.whl
+*.tar.gz
+
+# Docs build artifacts
+site/
+
+# Example export output
+examples/out/
+
