@@ -60,6 +60,7 @@ nav:
       - Dependencies: concepts/dependencies.md
       - Expressions: concepts/expressions.md
       - Exporting: concepts/exporting.md
+      - Importing: concepts/importing.md
   - Guides:
       - Scheduling: guides/scheduling.md
       - ETL Patterns: guides/etl-patterns.md
@@ -80,5 +81,6 @@ nav:
       - Expressions: reference/expressions.md
       - Schedules: reference/schedules.md
       - Export: reference/export.md
+      - Import: reference/import.md
       - Errors: reference/errors.md
       - Changelog: reference/changelog.md

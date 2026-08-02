@@ -66,11 +66,13 @@ from fabric_data_pipelines.errors import (
     CrossScopeDependencyError,
     CyclicDependencyError,
     DuplicateActivityNameError,
+    PipelineImportError,
     PipelineValidationError,
     ScheduleValidationError,
     UnknownDependencyError,
 )
 from fabric_data_pipelines.export import save_workspace
+from fabric_data_pipelines.importing import load_item, load_workspace, parse_activity
 from fabric_data_pipelines.pipeline import LibraryVariable, Parameter, Pipeline, Variable
 from fabric_data_pipelines.schedule import (
     Cron,
@@ -130,6 +132,7 @@ __all__ = [
     "Notebook",
     "Parameter",
     "Pipeline",
+    "PipelineImportError",
     "PipelineReference",
     "PipelineValidationError",
     "RawActivity",
@@ -157,6 +160,9 @@ __all__ = [
     "Weekly",
     "dump_json",
     "expr",
+    "load_item",
+    "load_workspace",
+    "parse_activity",
     "save_workspace",
     "weekly_at",
 ]

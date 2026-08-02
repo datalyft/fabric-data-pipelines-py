@@ -257,6 +257,40 @@ class Pipeline(FabricModel):
         """Serialize to Fabric pipeline JSON text."""
         return dump_json(self.to_dict(), indent=indent)
 
+    @classmethod
+    def from_dict(cls, data: dict[str, Any], *, name: str) -> Pipeline:
+        """Parse Fabric ``pipeline-content`` JSON into a typed pipeline.
+
+        The pipeline ``name`` is required because Fabric content JSON does not
+        include it (it lives on the item folder / ``.platform`` display name).
+
+        Unknown activity types become :class:`~fabric_data_pipelines.RawActivity`.
+        """
+        from fabric_data_pipelines.importing import pipeline_from_dict
+
+        return pipeline_from_dict(data, name=name)
+
+    @classmethod
+    def from_json(cls, text: str, *, name: str) -> Pipeline:
+        """Parse Fabric pipeline JSON text into a typed pipeline.
+
+        See :meth:`from_dict` for naming and typing rules.
+        """
+        from fabric_data_pipelines.importing import pipeline_from_json
+
+        return pipeline_from_json(text, name=name)
+
+    @classmethod
+    def load_item(cls, directory: str | Path) -> Pipeline:
+        """Load a Fabric ``*.DataPipeline`` Git item folder.
+
+        Reads ``pipeline-content.json``, optional ``.schedules``, and
+        ``logicalId`` from ``.platform`` when present.
+        """
+        from fabric_data_pipelines.importing import load_item
+
+        return load_item(directory)
+
     def save(self, path: str | Path) -> None:
         """Write ``pipeline-content.json`` (or any path) to disk.
 

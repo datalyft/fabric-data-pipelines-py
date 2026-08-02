@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Import: `Pipeline.from_dict` / `from_json`, `Pipeline.load_item`, `load_workspace`, and `parse_activity` for round-tripping Fabric JSON and `*.DataPipeline/` folders (unknown activities → `RawActivity`).
+- CLI: `fabric-data-pipelines codegen` emits Python source from an item folder or pipeline JSON.
+
 ## [0.2.1] - 2026-07-29
 
 ### Added

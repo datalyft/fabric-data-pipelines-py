@@ -359,7 +359,9 @@ If you rely on the derived value and later rename the pipeline, Fabric will trea
 
 ## Roadmap
 
-Importing existing Fabric JSON into Python (`from_json`) and additional activity types are planned — see [ROADMAP.md](ROADMAP.md).
+Additional activity types and stronger offline validation are planned — see [ROADMAP.md](ROADMAP.md). Outside PRs are closed for now; open a [GitHub Issue](https://github.com/datalyft/fabric-data-pipelines/issues) instead (bugs, features, roadmap votes).
+
+Import existing Fabric JSON or `*.DataPipeline/` folders with `Pipeline.from_json` / `Pipeline.load_item`, or generate Python via `fabric-data-pipelines codegen`.
 
 ## Development
 

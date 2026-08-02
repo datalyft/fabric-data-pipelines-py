@@ -16,11 +16,12 @@ This section documents the public Python API of `fabric-data-pipelines`. Symbols
 | [Expressions](expressions.md) | `expr` helpers for Fabric expression strings |
 | [Schedules](schedules.md) | Schedule models written to `.schedules` |
 | [Export](export.md) | Workspace export and serialization helpers |
-| [Errors](errors.md) | Validation and schedule error types |
+| [Import](import.md) | `from_json`, `load_item`, `load_workspace`, `parse_activity` |
+| [Errors](errors.md) | Validation, import, and schedule error types |
 | [Changelog](changelog.md) | Release history |
 
 Import symbols from the top-level package:
 
 ```python
-from fabric_data_pipelines import Pipeline, Wait, expr, save_workspace
+from fabric_data_pipelines import Pipeline, Wait, expr, save_workspace, load_workspace
 ```

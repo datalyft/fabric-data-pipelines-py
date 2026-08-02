@@ -99,7 +99,8 @@ Use `Pipeline.save_item()` or `save_workspace()` when your repository is the sou
 - Read [Getting Started](getting-started.md) for the first pipeline.
 - Read [Deploy to Fabric](guides/deploy.md) to close the loop with Git sync.
 - Read [Exporting](concepts/exporting.md) to understand JSON vs item-folder output.
+- Read [Importing](concepts/importing.md) to load existing Fabric items into typed Python.
 - Read [ETL Patterns](guides/etl-patterns.md) for real-world landing, ELT, schedule, and lock examples.
 - Read [How this compares](guides/positioning.md) vs the UI, fabricflow, fabric-cicd, and Terraform.
 - Browse the [API Reference](reference/index.md) for the public surface by concept.
-- See the [Roadmap](roadmap.md) for import-from-JSON and unmodeled activities.
+- See the [Roadmap](roadmap.md) for remaining activity types and validation work.

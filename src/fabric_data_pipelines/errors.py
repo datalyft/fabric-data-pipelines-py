@@ -1,4 +1,4 @@
-"""Validation errors raised when building a Fabric pipeline."""
+"""Validation and import errors raised when building a Fabric pipeline."""
 
 from __future__ import annotations
 
@@ -51,3 +51,7 @@ class CrossScopeDependencyError(PipelineValidationError):
 
 class ScheduleValidationError(PipelineValidationError):
     """Raised when constructing a Fabric pipeline schedule fails validation."""
+
+
+class PipelineImportError(ValueError):
+    """Raised when parsing Fabric pipeline JSON or item folders fails."""

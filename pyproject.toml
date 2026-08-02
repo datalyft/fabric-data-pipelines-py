@@ -30,6 +30,9 @@ dependencies = [
     "pydantic>=2.0",
 ]
 
+[project.scripts]
+fabric-data-pipelines = "fabric_data_pipelines.cli:main"
+
 [project.urls]
 Homepage = "https://github.com/datalyft/fabric-data-pipelines"
 Repository = "https://github.com/datalyft/fabric-data-pipelines"
