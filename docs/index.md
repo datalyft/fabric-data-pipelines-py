@@ -103,4 +103,4 @@ Use `Pipeline.save_item()` or `save_workspace()` when your repository is the sou
 - Read [ETL Patterns](guides/etl-patterns.md) for real-world landing, ELT, schedule, and lock examples.
 - Read [How this compares](guides/positioning.md) vs the UI, fabricflow, fabric-cicd, and Terraform.
 - Browse the [API Reference](reference/index.md) for the public surface by concept.
-- See the [Roadmap](roadmap.md) for remaining activity types and validation work.
+- Browse [GitHub Issues](https://github.com/datalyft/fabric-data-pipelines/issues) for planned work and to request features.

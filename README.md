@@ -279,7 +279,7 @@ Supported activity models include:
 | `Web` | `WebActivity` | HTTP via Fabric connection |
 | `RawActivity` | *(any)* | Escape hatch for unmodeled types |
 
-**Not modeled yet** (use `RawActivity`): GetMetadata, Azure Function, Teams/Outlook, and others. See the [roadmap](ROADMAP.md).
+**Not modeled yet** (use `RawActivity`): GetMetadata, Azure Function, Teams/Outlook, and others. Track or request work via [GitHub Issues](https://github.com/datalyft/fabric-data-pipelines/issues).
 
 ### Dependency chaining
 
@@ -357,11 +357,9 @@ If you rely on the derived value and later rename the pipeline, Fabric will trea
 
 **[fabric-data-pipelines.datalyft.io](https://fabric-data-pipelines.datalyft.io/latest/)** — guides, API reference, and pattern walkthroughs.
 
-## Roadmap
+## Feedback
 
-Additional activity types and stronger offline validation are planned — see [ROADMAP.md](ROADMAP.md). Outside PRs are closed for now; open a [GitHub Issue](https://github.com/datalyft/fabric-data-pipelines/issues) instead (bugs, features, roadmap votes).
-
-Import existing Fabric JSON or `*.DataPipeline/` folders with `Pipeline.from_json` / `Pipeline.load_item`, or generate Python via `fabric-data-pipelines codegen`.
+Outside pull requests are closed for now. Prefer [GitHub Issues](https://github.com/datalyft/fabric-data-pipelines/issues) — see [CONTRIBUTING.md](CONTRIBUTING.md) for what to include in bug reports and feature requests.
 
 ## Development
 

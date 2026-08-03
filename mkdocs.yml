@@ -67,7 +67,6 @@ nav:
       - Deploy to Fabric: guides/deploy.md
       - CI with GitHub Actions: guides/ci.md
       - How this compares: guides/positioning.md
-  - Roadmap: roadmap.md
   - Reference:
       - Overview: reference/index.md
       - Pipeline: reference/pipeline.md
