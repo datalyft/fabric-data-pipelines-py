@@ -1,4 +1,8 @@
-# fabric-data-pipelines
+<div class="fdp-hero" markdown="0">
+  <img src="assets/featured.jpg" alt="fabric-data-pipelines" width="1024" height="512" />
+</div>
+[Get started](getting-started.md){ .md-button .md-button--primary }
+[API reference](reference/index.md){ .md-button }
 
 `fabric-data-pipelines` is a Python library for building Microsoft Fabric data pipelines as code.
 
@@ -14,9 +18,14 @@ Fabric pipelines are JSON definitions under the hood. This library lets you work
 
 ## Before / after
 
-The value prop is simple: write Python, get the nested Fabric JSON. A landing truncate-and-copy is tens of lines of typed Python and expands to ~200 lines of pipeline JSON (policies, dataset settings, column mappings, library variables).
+=== "JSON (~200 lines)"
 
-=== "Python"
+    ~~~json
+    {% include "snippets/before_after_pipeline.json" %}
+    ~~~
+
+
+=== "Python (70 lines)"
 
     ```python
     from fabric_data_pipelines import (
@@ -66,12 +75,6 @@ The value prop is simple: write Python, get the nested Fabric JSON. A landing tr
     pipeline = Pipeline(name="Landing_customers", activities=[truncate, copy], ...)
     ```
 
-=== "Generated JSON (~200 lines)"
-
-    ~~~json
-    {% include "snippets/before_after_pipeline.json" %}
-    ~~~
-
 Full runnable source: [`examples/landing_truncate_copy.py`](https://github.com/datalyft/fabric-data-pipelines/blob/main/examples/landing_truncate_copy.py).
 
 ## What you can build
@@ -104,3 +107,7 @@ Use `Pipeline.save_item()` or `save_workspace()` when your repository is the sou
 - Read [How this compares](guides/positioning.md) vs the UI, fabricflow, fabric-cicd, and Terraform.
 - Browse the [API Reference](reference/index.md) for the public surface by concept.
 - Browse [GitHub Issues](https://github.com/datalyft/fabric-data-pipelines/issues) for planned work and to request features.
+
+<p class="fdp-sponsor">
+  Sponsored by <a href="https://datalyft.io">datalyft</a>
+</p>

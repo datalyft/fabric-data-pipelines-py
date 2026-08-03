@@ -192,4 +192,10 @@ def _emit_model(model: FabricModel, imports: set[str]) -> str:
         if field_name == "type" and field_info.default == value:
             continue
         parts.append(f"{field_name}={_emit_value(value, imports)}")
+    # Preserve extra="allow" keys (e.g. CopySource storeSettings / formatSettings).
+    extras = getattr(model, "__pydantic_extra__", None) or {}
+    for key, value in extras.items():
+        if value is None:
+            continue
+        parts.append(f"{key}={_emit_value(value, imports)}")
     return f"{name}({', '.join(parts)})"

@@ -6,16 +6,40 @@ repo_name: datalyft/fabric-data-pipelines
 docs_dir: docs
 theme:
   name: material
+  logo: assets/logo.png
+  favicon: assets/favicon.png
+  custom_dir: overrides
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+  font:
+    text: Manrope
+    code: JetBrains Mono
   features:
     - navigation.tabs
     - navigation.sections
     - navigation.top
+    - navigation.instant
     - search.suggest
     - search.highlight
     - content.code.copy
     - content.action.edit
   icon:
     repo: fontawesome/brands/github
+extra_css:
+  - stylesheets/extra.css
 markdown_extensions:
   - admonition
   - attr_list
@@ -52,6 +76,17 @@ plugins:
 extra:
   version:
     provider: mike
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/datalyft/fabric-data-pipelines
+      name: GitHub
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/fabric-data-pipelines/
+      name: PyPI
+    - icon: fontawesome/solid/globe
+      link: https://datalyft.io
+      name: datalyft
+copyright: Sponsored by <a href="https://datalyft.io" target="_blank" rel="noopener">datalyft</a>
 nav:
   - Overview: index.md
   - Getting Started: getting-started.md

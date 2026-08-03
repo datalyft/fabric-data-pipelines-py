@@ -155,6 +155,71 @@ def test_parse_activity_requires_name_and_type() -> None:
         parse_activity({"name": "w", "typeProperties": {"waitTimeInSeconds": 1}})
 
 
+def test_lookup_connection_settings_and_empty_schema_object() -> None:
+    """Fabric UI may emit connectionSettings and ``schema: {}`` on datasets."""
+    raw = {
+        "name": "Get notebook output",
+        "type": "Lookup",
+        "dependsOn": [],
+        "typeProperties": {
+            "source": {
+                "type": "JsonSource",
+                "storeSettings": {
+                    "type": "LakehouseReadSettings",
+                    "recursive": True,
+                    "enablePartitionDiscovery": False,
+                },
+                "formatSettings": {"type": "JsonReadSettings"},
+            },
+            "datasetSettings": {
+                "annotations": [],
+                "connectionSettings": {
+                    "name": "lakehouse_platform_monitoring",
+                    "properties": {
+                        "annotations": [],
+                        "type": "Lakehouse",
+                        "typeProperties": {
+                            "workspaceId": "ws",
+                            "artifactId": "lh",
+                            "rootFolder": "Files",
+                        },
+                        "externalReferences": {"connection": "conn-id"},
+                    },
+                },
+                "type": "Json",
+                "typeProperties": {
+                    "location": {
+                        "type": "LakehouseLocation",
+                        "fileName": "enriched_rows.json",
+                        "folderPath": "pipeline_outputs",
+                    }
+                },
+                "schema": {},
+            },
+        },
+        "policy": {
+            "timeout": "0.12:00:00",
+            "retry": 0,
+            "retryIntervalInSeconds": 30,
+            "secureOutput": False,
+            "secureInput": False,
+        },
+    }
+    activity = parse_activity(raw)
+    assert isinstance(activity, Lookup)
+    assert activity.dataset_settings.schema_ == []
+    assert activity.dataset_settings.connection_settings is not None
+    assert activity.dataset_settings.connection_settings.name == "lakehouse_platform_monitoring"
+    assert (
+        activity.dataset_settings.connection_settings.properties.external_references is not None
+    )
+    exported = activity.to_dict()
+    ds = exported["typeProperties"]["datasetSettings"]
+    assert ds["schema"] == []
+    assert ds["connectionSettings"]["name"] == "lakehouse_platform_monitoring"
+    assert exported["typeProperties"]["source"]["storeSettings"]["type"] == "LakehouseReadSettings"
+
+
 def test_load_item_round_trip(tmp_path: Path) -> None:
     schedule = Schedule(
         enabled=True,

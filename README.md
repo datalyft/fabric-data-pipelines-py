@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/assets/featured.jpg" alt="fabric-data-pipelines" width="720" />
+</p>
+
 # fabric-data-pipelines
 
 [![PyPI](https://img.shields.io/pypi/v/fabric-data-pipelines)](https://pypi.org/project/fabric-data-pipelines/)
@@ -6,8 +10,6 @@
 [![Downloads](https://img.shields.io/pypi/dm/fabric-data-pipelines)](https://pypi.org/project/fabric-data-pipelines/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Docs](https://img.shields.io/badge/docs-fabric--data--pipelines.datalyft.io-blue)](https://fabric-data-pipelines.datalyft.io/latest/)
-
-**Docs:** [fabric-data-pipelines.datalyft.io](https://fabric-data-pipelines.datalyft.io/latest)
 
 `fabric-data-pipelines` is a Python library for authoring [Microsoft Fabric](https://learn.microsoft.com/fabric) data pipelines as code.
 
@@ -376,3 +378,7 @@ Maintainer notes (releases, Amplify docs hosting): [`maintainers/`](maintainers/
 ## License
 
 MIT
+
+## Sponsors
+
+This project is sponsored by [datalyft](https://datalyft.io).
