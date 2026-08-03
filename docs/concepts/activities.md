@@ -25,7 +25,7 @@ Activities are the units of work in a Fabric pipeline. This library models them 
 
 ## Not modeled yet
 
-These Fabric activity types have no first-class class yet. Pass them through `RawActivity`, or track progress on the [Roadmap](../roadmap.md):
+These Fabric activity types have no first-class class yet. Pass them through `RawActivity`, or track / request work on [GitHub Issues](https://github.com/datalyft/fabric-data-pipelines/issues):
 
 | Fabric activity | Notes |
 | --- | --- |

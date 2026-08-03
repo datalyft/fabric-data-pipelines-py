@@ -1,6 +1,6 @@
 # Errors
 
-Validation exceptions raised before a pipeline or schedule is serialized.
+Validation and import exceptions raised by the library.
 
 ::: fabric_data_pipelines.PipelineValidationError
 
@@ -13,3 +13,5 @@ Validation exceptions raised before a pipeline or schedule is serialized.
 ::: fabric_data_pipelines.CrossScopeDependencyError
 
 ::: fabric_data_pipelines.ScheduleValidationError
+
+::: fabric_data_pipelines.PipelineImportError

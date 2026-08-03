@@ -5,6 +5,9 @@ from fabric_data_pipelines import (
     ColumnMapping,
     ColumnRef,
     Copy,
+    DataWarehouseSource,
+    DataWarehouseTable,
+    Expression,
     Pipeline,
     SqlMISink,
     SqlMISource,
@@ -61,3 +64,88 @@ def test_copy_sql_mi_round_shape() -> None:
 
     pipeline = Pipeline(name="copy_demo", activities=[copy])
     assert pipeline.to_dict()["properties"]["activities"][0]["name"] == "Copy_customers"
+
+
+def test_sql_mi_source_expression_sql_reader_query_round_trip() -> None:
+    """Fabric may emit sqlReaderQuery as an Expression object (#16)."""
+    payload = {
+        "properties": {
+            "activities": [
+                {
+                    "name": "Copy_Dynamic_Query",
+                    "type": "Copy",
+                    "dependsOn": [],
+                    "typeProperties": {
+                        "source": {
+                            "type": "SqlMISource",
+                            "sqlReaderQuery": {
+                                "value": "@variables('query_sql')",
+                                "type": "Expression",
+                            },
+                            "datasetSettings": {
+                                "type": "AzureSqlMITable",
+                                "typeProperties": {
+                                    "schema": "dbo",
+                                    "table": "customers",
+                                    "database": "SourceDb",
+                                },
+                                "externalReferences": {
+                                    "connection": ("@pipeline().libraryVariables.Demo_Source")
+                                },
+                            },
+                        },
+                        "sink": {
+                            "type": "SqlMISink",
+                            "writeBehavior": "insert",
+                            "datasetSettings": {
+                                "type": "AzureSqlMITable",
+                                "typeProperties": {
+                                    "schema": "dbo",
+                                    "table": "customers",
+                                    "database": "Landing",
+                                },
+                                "externalReferences": {
+                                    "connection": ("@pipeline().libraryVariables.Demo_Landing")
+                                },
+                            },
+                        },
+                    },
+                }
+            ]
+        }
+    }
+    pipeline = Pipeline.from_dict(payload, name="demo_dynamic_copy")
+    copy = pipeline.activities[0]
+    assert isinstance(copy, Copy)
+    assert isinstance(copy.source, SqlMISource)
+    assert isinstance(copy.source.sql_reader_query, Expression)
+    assert copy.source.sql_reader_query.value == "@variables('query_sql')"
+
+    exported = pipeline.to_dict()
+    query = exported["properties"]["activities"][0]["typeProperties"]["source"]["sqlReaderQuery"]
+    assert query == {"value": "@variables('query_sql')", "type": "Expression"}
+
+
+def test_sql_mi_source_string_sql_reader_query_unchanged() -> None:
+    source = SqlMISource(sql_reader_query="SELECT 1 AS id")
+    dumped = source.model_dump(by_alias=True, exclude_none=True, mode="json")
+    assert dumped["sqlReaderQuery"] == "SELECT 1 AS id"
+
+
+def test_data_warehouse_source_expression_sql_reader_query() -> None:
+    source = DataWarehouseSource(
+        sql_reader_query={
+            "value": "@variables('query_sql')",
+            "type": "Expression",
+        },
+        dataset_settings=DataWarehouseTable(
+            table="customers",
+            connection=expr.library_variable("Demo_Wh"),
+        ),
+    )
+    assert isinstance(source.sql_reader_query, Expression)
+    dumped = source.model_dump(by_alias=True, exclude_none=True, mode="json")
+    assert dumped["sqlReaderQuery"] == {
+        "value": "@variables('query_sql')",
+        "type": "Expression",
+    }

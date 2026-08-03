@@ -60,13 +60,13 @@ nav:
       - Dependencies: concepts/dependencies.md
       - Expressions: concepts/expressions.md
       - Exporting: concepts/exporting.md
+      - Importing: concepts/importing.md
   - Guides:
       - Scheduling: guides/scheduling.md
       - ETL Patterns: guides/etl-patterns.md
       - Deploy to Fabric: guides/deploy.md
       - CI with GitHub Actions: guides/ci.md
       - How this compares: guides/positioning.md
-  - Roadmap: roadmap.md
   - Reference:
       - Overview: reference/index.md
       - Pipeline: reference/pipeline.md
@@ -80,5 +80,6 @@ nav:
       - Expressions: reference/expressions.md
       - Schedules: reference/schedules.md
       - Export: reference/export.md
+      - Import: reference/import.md
       - Errors: reference/errors.md
       - Changelog: reference/changelog.md
