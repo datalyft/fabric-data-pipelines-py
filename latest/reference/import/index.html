@@ -10,28 +10,28 @@
       
       
       
-        <link rel="canonical" href="https://fabric-data-pipelines.datalyft.io/latest/roadmap/">
+        <link rel="canonical" href="https://fabric-data-pipelines.datalyft.io/latest/reference/import/">
       
       
-        <link rel="prev" href="../guides/positioning/">
+        <link rel="prev" href="../export/">
       
       
-        <link rel="next" href="../reference/">
+        <link rel="next" href="../errors/">
       
       
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Roadmap - fabric-data-pipelines</title>
+        <title>Import - fabric-data-pipelines</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -50,9 +50,9 @@
       
     
     
-      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -69,6 +69,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#import" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -83,7 +88,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="fabric-data-pipelines" class="md-header__button md-logo" aria-label="fabric-data-pipelines" data-md-component="logo">
+    <a href="../.." title="fabric-data-pipelines" class="md-header__button md-logo" aria-label="fabric-data-pipelines" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -103,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Roadmap
+              Import
             
           </span>
         </div>
@@ -190,7 +195,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -209,7 +214,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../getting-started/" class="md-tabs__link">
+      <a href="../../getting-started/" class="md-tabs__link">
         
   
   
@@ -230,7 +235,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../concepts/activities/" class="md-tabs__link">
+        <a href="../../concepts/activities/" class="md-tabs__link">
           
   
   
@@ -250,7 +255,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../guides/scheduling/" class="md-tabs__link">
+        <a href="../../guides/scheduling/" class="md-tabs__link">
           
   
   
@@ -269,29 +274,10 @@
     
   
   
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
-        
-  
-  
-    
-  
-  Roadmap
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
     
     
-      <li class="md-tabs__item">
-        <a href="../reference/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -325,7 +311,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="fabric-data-pipelines" class="md-nav__button md-logo" aria-label="fabric-data-pipelines" data-md-component="logo">
+    <a href="../.." title="fabric-data-pipelines" class="md-nav__button md-logo" aria-label="fabric-data-pipelines" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -355,7 +341,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -382,7 +368,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/" class="md-nav__link">
+      <a href="../../getting-started/" class="md-nav__link">
         
   
   
@@ -461,7 +447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../concepts/activities/" class="md-nav__link">
+      <a href="../../concepts/activities/" class="md-nav__link">
         
   
   
@@ -489,7 +475,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../concepts/dependencies/" class="md-nav__link">
+      <a href="../../concepts/dependencies/" class="md-nav__link">
         
   
   
@@ -517,7 +503,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../concepts/expressions/" class="md-nav__link">
+      <a href="../../concepts/expressions/" class="md-nav__link">
         
   
   
@@ -545,7 +531,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../concepts/exporting/" class="md-nav__link">
+      <a href="../../concepts/exporting/" class="md-nav__link">
         
   
   
@@ -553,6 +539,34 @@
     
   
     Exporting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/importing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Importing
   
 
     
@@ -632,7 +646,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/scheduling/" class="md-nav__link">
+      <a href="../../guides/scheduling/" class="md-nav__link">
         
   
   
@@ -660,7 +674,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/etl-patterns/" class="md-nav__link">
+      <a href="../../guides/etl-patterns/" class="md-nav__link">
         
   
   
@@ -688,7 +702,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/deploy/" class="md-nav__link">
+      <a href="../../guides/deploy/" class="md-nav__link">
         
   
   
@@ -716,7 +730,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/ci/" class="md-nav__link">
+      <a href="../../guides/ci/" class="md-nav__link">
         
   
   
@@ -744,7 +758,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/positioning/" class="md-nav__link">
+      <a href="../../guides/positioning/" class="md-nav__link">
         
   
   
@@ -780,57 +794,27 @@
   
   
   
-    <li class="md-nav__item md-nav__item--active">
+    
+    
+    
+    
       
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
         
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Roadmap
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -848,8 +832,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -866,7 +850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -894,7 +878,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/pipeline/" class="md-nav__link">
+      <a href="../pipeline/" class="md-nav__link">
         
   
   
@@ -928,17 +912,20 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
         
           
-          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="">
             
   
   
@@ -956,8 +943,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -974,7 +961,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/activities/base/" class="md-nav__link">
+      <a href="../activities/base/" class="md-nav__link">
         
   
   
@@ -1002,7 +989,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/activities/control/" class="md-nav__link">
+      <a href="../activities/control/" class="md-nav__link">
         
   
   
@@ -1030,7 +1017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/activities/data-movement/" class="md-nav__link">
+      <a href="../activities/data-movement/" class="md-nav__link">
         
   
   
@@ -1058,7 +1045,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/activities/execution/" class="md-nav__link">
+      <a href="../activities/execution/" class="md-nav__link">
         
   
   
@@ -1086,7 +1073,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/activities/variables/" class="md-nav__link">
+      <a href="../activities/variables/" class="md-nav__link">
         
   
   
@@ -1114,7 +1101,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/activities/raw/" class="md-nav__link">
+      <a href="../activities/raw/" class="md-nav__link">
         
   
   
@@ -1150,7 +1137,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/expressions/" class="md-nav__link">
+      <a href="../expressions/" class="md-nav__link">
         
   
   
@@ -1178,7 +1165,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/schedules/" class="md-nav__link">
+      <a href="../schedules/" class="md-nav__link">
         
   
   
@@ -1206,7 +1193,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/export/" class="md-nav__link">
+      <a href="../export/" class="md-nav__link">
         
   
   
@@ -1231,10 +1218,151 @@
                 
   
   
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fabric_data_pipelines.Pipeline.from_dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        from_dict
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fabric_data_pipelines.Pipeline.from_json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        from_json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fabric_data_pipelines.Pipeline.load_item" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_item
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fabric_data_pipelines.load_item" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_item
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fabric_data_pipelines.load_workspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_workspace
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fabric_data_pipelines.parse_activity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        parse_activity
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
   
   
     <li class="md-nav__item">
-      <a href="../reference/errors/" class="md-nav__link">
+      <a href="../errors/" class="md-nav__link">
         
   
   
@@ -1262,7 +1390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/changelog/" class="md-nav__link">
+      <a href="../changelog/" class="md-nav__link">
         
   
   
@@ -1307,6 +1435,82 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fabric_data_pipelines.Pipeline.from_dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        from_dict
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fabric_data_pipelines.Pipeline.from_json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        from_json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fabric_data_pipelines.Pipeline.load_item" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_item
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fabric_data_pipelines.load_item" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_item
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fabric_data_pipelines.load_workspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_workspace
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fabric_data_pipelines.parse_activity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        parse_activity
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1323,7 +1527,7 @@
 
 
   
-    <a href="https://github.com/datalyft/fabric-data-pipelines/edit/master/docs/roadmap.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/datalyft/fabric-data-pipelines/edit/master/docs/reference/import.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1331,9 +1535,200 @@
   
 
 
-  <h1>Roadmap</h1>
+<h1 id="import">Import<a class="headerlink" href="#import" title="Permanent link">&para;</a></h1>
+<p>Load Fabric pipeline JSON and Git item folders into typed models.</p>
 
 
+<div class="doc doc-object doc-function">
+
+
+<h2 id="fabric_data_pipelines.Pipeline.from_dict" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fabric_data_pipelines.Pipeline.from_dict</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+<a href="#fabric_data_pipelines.Pipeline.from_dict" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Pipeline</span>
+</code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Parse Fabric <code>pipeline-content</code> JSON into a typed pipeline.</p>
+<p>The pipeline <code>name</code> is required because Fabric content JSON does not
+include it (it lives on the item folder / <code>.platform</code> display name).</p>
+<p>Unknown activity types become :class:<code>~fabric_data_pipelines.RawActivity</code>.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="fabric_data_pipelines.Pipeline.from_json" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fabric_data_pipelines.Pipeline.from_json</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+<a href="#fabric_data_pipelines.Pipeline.from_json" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">from_json</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Pipeline</span>
+</code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Parse Fabric pipeline JSON text into a typed pipeline.</p>
+<p>See :meth:<code>from_dict</code> for naming and typing rules.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="fabric_data_pipelines.Pipeline.load_item" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fabric_data_pipelines.Pipeline.load_item</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+<a href="#fabric_data_pipelines.Pipeline.load_item" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">load_item</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Pipeline</span>
+</code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Load a Fabric <code>*.DataPipeline</code> Git item folder.</p>
+<p>Reads <code>pipeline-content.json</code>, optional <code>.schedules</code>, and
+<code>logicalId</code> from <code>.platform</code> when present.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="fabric_data_pipelines.load_item" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fabric_data_pipelines.load_item</span>
+
+
+<a href="#fabric_data_pipelines.load_item" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">load_item</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Pipeline</span>
+</code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Load a Fabric <code>*.DataPipeline</code> item folder into a typed :class:<code>Pipeline</code>.</p>
+<p>Reads <code>pipeline-content.json</code>, optional <code>.schedules</code>, and <code>logicalId</code> from
+<code>.platform</code> when present.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="fabric_data_pipelines.load_workspace" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fabric_data_pipelines.load_workspace</span>
+
+
+<a href="#fabric_data_pipelines.load_workspace" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">load_workspace</span><span class="p">(</span>
+    <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">recursive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Pipeline</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Load <code>*.DataPipeline</code> item folders under a workspace directory.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>directory</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span> | <span title="pathlib.Path">Path</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Workspace root (or any folder that may contain item folders).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>recursive</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>When <code>True</code> (default), discover all <code>*.DataPipeline</code>
+directories under <code>directory</code> via a recursive walk. When <code>False</code>,
+only immediate children of <code>directory</code> are considered.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="fabric_data_pipelines.parse_activity" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fabric_data_pipelines.parse_activity</span>
+
+
+<a href="#fabric_data_pipelines.parse_activity" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">parse_activity</span><span class="p">(</span><span class="n">raw</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Activity</span>
+</code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Parse one Fabric activity envelope into a typed model or <code>RawActivity</code>.</p>
+
+
+    </div>
+
+</div>
 
 
 
@@ -1389,10 +1784,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
