@@ -607,17 +607,31 @@ def load_item(directory: str | Path) -> Pipeline:
     return pipeline
 
 
-def load_workspace(directory: str | Path) -> list[Pipeline]:
-    """Load all ``*.DataPipeline`` item folders under a workspace directory."""
+def load_workspace(
+    directory: str | Path,
+    *,
+    recursive: bool = True,
+) -> list[Pipeline]:
+    """Load ``*.DataPipeline`` item folders under a workspace directory.
+
+    Args:
+        directory: Workspace root (or any folder that may contain item folders).
+        recursive: When ``True`` (default), discover all ``*.DataPipeline``
+            directories under ``directory`` via a recursive walk. When ``False``,
+            only immediate children of ``directory`` are considered.
+    """
     directory_path = Path(directory)
     if not directory_path.is_dir():
         raise PipelineImportError(f"Workspace directory does not exist: '{directory_path}'")
 
-    items = sorted(
-        child
-        for child in directory_path.iterdir()
-        if child.is_dir() and child.name.endswith(".DataPipeline")
-    )
+    if recursive:
+        items = sorted(child for child in directory_path.rglob("*.DataPipeline") if child.is_dir())
+    else:
+        items = sorted(
+            child
+            for child in directory_path.iterdir()
+            if child.is_dir() and child.name.endswith(".DataPipeline")
+        )
     if not items:
         raise PipelineImportError(f"No *.DataPipeline folders found under '{directory_path}'")
     return [load_item(item) for item in items]

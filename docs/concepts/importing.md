@@ -24,10 +24,12 @@ from fabric_data_pipelines import Pipeline, load_workspace
 pipeline = Pipeline.load_item("out/Daily_Silver_Sales.DataPipeline")
 # logicalId from .platform and schedules from .schedules are restored when present
 
-pipelines = load_workspace("out")  # all *.DataPipeline/ children
+pipelines = load_workspace("out")  # all *.DataPipeline/ folders, including nested
+pipelines_top = load_workspace("out", recursive=False)  # immediate children only
 ```
 
 `load_item` also accepts a workspace directory that contains exactly one `*.DataPipeline` folder.
+`load_workspace` discovers item folders recursively by default; pass `recursive=False` for a shallow scan.
 
 ## Round-trip
 

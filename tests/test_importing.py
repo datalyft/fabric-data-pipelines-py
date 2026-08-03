@@ -207,6 +207,20 @@ def test_load_workspace(tmp_path: Path) -> None:
     assert [p.name for p in loaded] == ["pipe_a", "pipe_b"]
 
 
+def test_load_workspace_recursive_discovers_nested(tmp_path: Path) -> None:
+    top = Pipeline(name="pipe_a", activities=[Wait(name="w", wait_time_in_seconds=1)])
+    nested = Pipeline(name="pipe_b", activities=[Wait(name="w2", wait_time_in_seconds=2)])
+    top.save_item(tmp_path)
+    nested.save_item(tmp_path / "Nested")
+
+    loaded = load_workspace(tmp_path)
+    # Sorted by path: Nested/pipe_b comes before top-level pipe_a
+    assert [p.name for p in loaded] == ["pipe_b", "pipe_a"]
+
+    shallow = load_workspace(tmp_path, recursive=False)
+    assert [p.name for p in shallow] == ["pipe_a"]
+
+
 def test_load_workspace_empty(tmp_path: Path) -> None:
     with pytest.raises(PipelineImportError, match="No \\*\\.DataPipeline"):
         load_workspace(tmp_path)

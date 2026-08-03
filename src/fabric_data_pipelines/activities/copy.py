@@ -4,11 +4,21 @@ from __future__ import annotations
 
 from typing import Any, ClassVar
 
-from pydantic import ConfigDict, Field, model_serializer
+from pydantic import ConfigDict, Field, field_validator, model_serializer
 
 from fabric_data_pipelines.activities.base import Activity, ActivityPolicy, ExternalReferences
 from fabric_data_pipelines.activities.datasets import DatasetSettings
-from fabric_data_pipelines.serialization import FabricModel, to_camel
+from fabric_data_pipelines.serialization import Expression, FabricModel, to_camel
+
+# Fabric emits sqlReaderQuery as a plain string or an Expression object.
+SqlReaderQuery = Expression | str | dict[str, Any]
+
+
+def _coerce_sql_reader_query(value: Any) -> Any:
+    """Accept Expression dicts the same way ``ScriptBlock.text`` does."""
+    if isinstance(value, dict) and "value" in value:
+        return value
+    return value
 
 
 class _ConnectorModel(FabricModel):
@@ -70,6 +80,10 @@ class CopySink(_ConnectorModel):
 class SqlMISource(CopySource):
     """Azure SQL Managed Instance copy source.
 
+    ``sql_reader_query`` accepts a plain SQL string or a Fabric Expression
+    object (``{"value": "...", "type": "Expression"}``), matching UI exports
+    that bind the query from pipeline variables.
+
     Example::
 
         SqlMISource(
@@ -82,8 +96,13 @@ class SqlMISource(CopySource):
     """
 
     type: str = "SqlMISource"
-    sql_reader_query: str | None = None
+    sql_reader_query: SqlReaderQuery | None = None
     partition_option: str | None = None
+
+    @field_validator("sql_reader_query", mode="before")
+    @classmethod
+    def _coerce_sql_reader_query(cls, value: Any) -> Any:
+        return _coerce_sql_reader_query(value)
 
 
 class SqlMISink(CopySink):
@@ -107,10 +126,19 @@ class LakehouseTableSink(CopySink):
 
 
 class DataWarehouseSource(CopySource):
-    """Fabric Data Warehouse copy source."""
+    """Fabric Data Warehouse copy source.
+
+    ``sql_reader_query`` accepts a plain SQL string or a Fabric Expression
+    object, same as :class:`SqlMISource`.
+    """
 
     type: str = "DataWarehouseSource"
-    sql_reader_query: str | None = None
+    sql_reader_query: SqlReaderQuery | None = None
+
+    @field_validator("sql_reader_query", mode="before")
+    @classmethod
+    def _coerce_sql_reader_query(cls, value: Any) -> Any:
+        return _coerce_sql_reader_query(value)
 
 
 class DataWarehouseSink(CopySink):
