@@ -10,6 +10,7 @@ import pytest
 from fabric_data_pipelines import (
     Copy,
     Dataflow,
+    DatasetSettings,
     Fail,
     ForEach,
     LakehouseTable,
@@ -207,6 +208,7 @@ def test_lookup_connection_settings_and_empty_schema_object() -> None:
     }
     activity = parse_activity(raw)
     assert isinstance(activity, Lookup)
+    assert isinstance(activity.dataset_settings, DatasetSettings)
     assert activity.dataset_settings.schema_ == []
     assert activity.dataset_settings.connection_settings is not None
     assert activity.dataset_settings.connection_settings.name == "lakehouse_platform_monitoring"
