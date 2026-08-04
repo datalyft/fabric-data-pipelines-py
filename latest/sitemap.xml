@@ -2,106 +2,110 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/getting-started/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/concepts/activities/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/concepts/dependencies/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/concepts/exporting/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/concepts/expressions/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/concepts/importing/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/guides/ci/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/guides/deploy/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/guides/etl-patterns/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
+    </url>
+    <url>
+         <loc>https://fabric-data-pipelines.datalyft.io/latest/guides/migrate/</loc>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/guides/positioning/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/guides/scheduling/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/reference/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/reference/changelog/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/reference/errors/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/reference/export/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/reference/expressions/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/reference/import/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/reference/pipeline/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/reference/schedules/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/reference/activities/base/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/reference/activities/control/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/reference/activities/data-movement/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/reference/activities/execution/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/reference/activities/raw/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
     <url>
          <loc>https://fabric-data-pipelines.datalyft.io/latest/reference/activities/variables/</loc>
-         <lastmod>2026-08-03</lastmod>
+         <lastmod>2026-08-04</lastmod>
     </url>
 </urlset>

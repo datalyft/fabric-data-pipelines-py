@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://fabric-data-pipelines.datalyft.io/latest/guides/deploy/">
+        <link rel="canonical" href="https://fabric-data-pipelines.datalyft.io/latest/guides/migrate/">
       
       
-        <link rel="prev" href="../etl-patterns/">
+        <link rel="prev" href="../deploy/">
       
       
-        <link rel="next" href="../migrate/">
+        <link rel="next" href="../ci/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Deploy to Fabric - fabric-data-pipelines</title>
+        <title>Migrate from Fabric - fabric-data-pipelines</title>
       
     
     
@@ -93,7 +93,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#deploy-to-fabric" class="md-skip">
+        <a href="#migrate-from-fabric-ui-git" class="md-skip">
           Skip to content
         </a>
       
@@ -130,7 +130,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Deploy to Fabric
+              Migrate from Fabric
             
           </span>
         </div>
@@ -751,6 +751,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deploy to Fabric
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -770,7 +798,7 @@
   <span class="md-ellipsis">
     
   
-    Deploy to Fabric
+    Migrate from Fabric
   
 
     
@@ -788,7 +816,7 @@
   <span class="md-ellipsis">
     
   
-    Deploy to Fabric
+    Migrate from Fabric
   
 
     
@@ -814,10 +842,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#primary-path-git-sync" class="md-nav__link">
+  <a href="#1-get-the-artifacts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Primary path: Git sync
+        1. Get the artifacts
       
     </span>
   </a>
@@ -825,10 +853,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pair-with-fabric-cicd" class="md-nav__link">
+  <a href="#2-generate-python-with-the-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pair with fabric-cicd
+        2. Generate Python with the CLI
       
     </span>
   </a>
@@ -836,10 +864,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pair-with-terraform" class="md-nav__link">
+  <a href="#3-review-the-generated-source" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pair with Terraform
+        3. Review the generated source
       
     </span>
   </a>
@@ -847,10 +875,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rest-items-api" class="md-nav__link">
+  <a href="#4-edit-in-python" class="md-nav__link">
     <span class="md-ellipsis">
       
-        REST Items API
+        4. Edit in Python
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-re-export-and-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Re-export and sync
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#load-without-codegen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Load without codegen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fidelity-and-caveats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fidelity and caveats
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bulk-workspaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bulk workspaces
       
     </span>
   </a>
@@ -872,34 +944,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../migrate/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Migrate from Fabric
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1506,10 +1550,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#primary-path-git-sync" class="md-nav__link">
+  <a href="#1-get-the-artifacts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Primary path: Git sync
+        1. Get the artifacts
       
     </span>
   </a>
@@ -1517,10 +1561,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pair-with-fabric-cicd" class="md-nav__link">
+  <a href="#2-generate-python-with-the-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pair with fabric-cicd
+        2. Generate Python with the CLI
       
     </span>
   </a>
@@ -1528,10 +1572,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pair-with-terraform" class="md-nav__link">
+  <a href="#3-review-the-generated-source" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pair with Terraform
+        3. Review the generated source
       
     </span>
   </a>
@@ -1539,10 +1583,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rest-items-api" class="md-nav__link">
+  <a href="#4-edit-in-python" class="md-nav__link">
     <span class="md-ellipsis">
       
-        REST Items API
+        4. Edit in Python
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-re-export-and-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Re-export and sync
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#load-without-codegen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Load without codegen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fidelity-and-caveats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fidelity and caveats
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bulk-workspaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bulk workspaces
       
     </span>
   </a>
@@ -1577,7 +1665,7 @@
 
 
   
-    <a href="https://github.com/datalyft/fabric-data-pipelines/edit/master/docs/guides/deploy.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/datalyft/fabric-data-pipelines/edit/master/docs/guides/migrate.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1585,53 +1673,58 @@
   
 
 
-<h1 id="deploy-to-fabric">Deploy to Fabric<a class="headerlink" href="#deploy-to-fabric" title="Permanent link">&para;</a></h1>
-<p>This library stops at Fabric-compatible artifacts: raw pipeline JSON or <code>*.DataPipeline/</code> item folders. Getting those into a workspace is a separate step. The usual path is <strong>Git sync</strong>; teams with promotion pipelines often pair the export with <strong>fabric-cicd</strong>, <strong>Terraform</strong>, or the <strong>Items REST API</strong>.</p>
-<h2 id="primary-path-git-sync">Primary path: Git sync<a class="headerlink" href="#primary-path-git-sync" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Author pipelines in Python and export item folders:
-  <div class="highlight"><pre><span></span><code> <span class="kn">from</span><span class="w"> </span><span class="nn">fabric_data_pipelines</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span><span class="p">,</span> <span class="n">Wait</span>
+<h1 id="migrate-from-fabric-ui-git">Migrate from Fabric UI / Git<a class="headerlink" href="#migrate-from-fabric-ui-git" title="Permanent link">&para;</a></h1>
+<p>Move existing Fabric pipelines from the portal or Git-synced item folders into typed Python as the authoring source of truth. Deploy stays the same: export <code>*.DataPipeline/</code> folders and sync with Git (or promote with fabric-cicd).</p>
+<h2 id="1-get-the-artifacts">1. Get the artifacts<a class="headerlink" href="#1-get-the-artifacts" title="Permanent link">&para;</a></h2>
+<p>You need either:</p>
+<ul>
+<li>a Fabric Git item folder (<code>Something.DataPipeline/</code> with <code>pipeline-content.json</code>, <code>.platform</code>, and optional <code>.schedules</code>), or</li>
+<li>raw pipeline JSON / <code>pipeline-content.json</code> exported from Fabric.</li>
+</ul>
+<p>If the workspace is already Git-connected, pull or clone the connected repo and locate the <code>*.DataPipeline/</code> folders you want to migrate.</p>
+<h2 id="2-generate-python-with-the-cli">2. Generate Python with the CLI<a class="headerlink" href="#2-generate-python-with-the-cli" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>fabric-data-pipelines<span class="w"> </span>codegen<span class="w"> </span>path/to/Item.DataPipeline<span class="w"> </span>-o<span class="w"> </span>pipeline.py
+fabric-data-pipelines<span class="w"> </span>codegen<span class="w"> </span>path/to/pipeline-content.json<span class="w"> </span>--name<span class="w"> </span>MyPipeline<span class="w"> </span>-o<span class="w"> </span>pipeline.py
+</code></pre></div>
+<p>Item folders (or a <code>pipeline-content.json</code> inside one) restore the display name, <code>logicalId</code>, and schedules when present. Standalone JSON requires <code>--name</code> because Fabric content files do not store the pipeline name.</p>
+<h2 id="3-review-the-generated-source">3. Review the generated source<a class="headerlink" href="#3-review-the-generated-source" title="Permanent link">&para;</a></h2>
+<p>Modeled activities become constructors (<code>Notebook</code>, <code>Copy</code>, <code>IfCondition</code>, …). Anything the library does not model yet is emitted as <code>RawActivity(...)</code> with the original <code>type</code> and <code>typeProperties</code>. Unrecognized Copy connectors or datasets use generic escape hatches (<code>CopySource</code>, <code>Dataset</code>).</p>
+<p>Keep <code>RawActivity</code> where it is fine, or replace pieces gradually with typed classes as you adopt them. See <a href="../../concepts/activities/">Activities</a> and <a href="../../reference/activities/raw/">Raw</a>.</p>
+<h2 id="4-edit-in-python">4. Edit in Python<a class="headerlink" href="#4-edit-in-python" title="Permanent link">&para;</a></h2>
+<p>Treat the generated file as a starting point:</p>
+<ul>
+<li>tighten dependencies with <code>.then()</code>, <code>.after()</code>, or <code>&gt;&gt;</code></li>
+<li>replace string expressions with <code>expr.*</code> helpers where useful</li>
+<li>add parameters, library variables, or schedules in code</li>
+<li>pin <code>Pipeline(logical_id=...)</code> from <code>.platform</code> when renames must keep the same Fabric identity</li>
+</ul>
+<h2 id="5-re-export-and-sync">5. Re-export and sync<a class="headerlink" href="#5-re-export-and-sync" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">pipeline</span><span class="o">.</span><span class="n">save_item</span><span class="p">(</span><span class="s2">&quot;workspace&quot;</span><span class="p">)</span>  <span class="c1"># -&gt; workspace/&lt;Name&gt;.DataPipeline/</span>
+</code></pre></div>
+<p>Commit the folders into the Git-connected repo and sync into Fabric. See <a href="../deploy/">Deploy to Fabric</a>.</p>
+<h2 id="load-without-codegen">Load without codegen<a class="headerlink" href="#load-without-codegen" title="Permanent link">&para;</a></h2>
+<p>When you only need to inspect, validate, or round-trip in memory (no Python source yet):</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">fabric_data_pipelines</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span><span class="p">,</span> <span class="n">load_workspace</span>
 
- <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
-     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Daily_Silver_Sales_Transform&quot;</span><span class="p">,</span>
-     <span class="n">activities</span><span class="o">=</span><span class="p">[</span><span class="n">Wait</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;pause&quot;</span><span class="p">,</span> <span class="n">wait_time_in_seconds</span><span class="o">=</span><span class="mi">30</span><span class="p">)],</span>
- <span class="p">)</span>
- <span class="n">pipeline</span><span class="o">.</span><span class="n">save_item</span><span class="p">(</span><span class="s2">&quot;workspace&quot;</span><span class="p">)</span>  <span class="c1"># -&gt; workspace/Daily_Silver_Sales_Transform.DataPipeline/</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="o">.</span><span class="n">load_item</span><span class="p">(</span><span class="s2">&quot;out/Daily_Silver_Sales.DataPipeline&quot;</span><span class="p">)</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">json_text</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Daily_Silver_Sales&quot;</span><span class="p">)</span>
+<span class="n">pipelines</span> <span class="o">=</span> <span class="n">load_workspace</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span>  <span class="c1"># all *.DataPipeline/ folders</span>
 </code></pre></div>
-   Or export several at once with <code>save_workspace([...], "workspace")</code>.</li>
-<li>Commit the generated folders into the repository that is connected to your Fabric workspace (GitHub or Azure DevOps). A typical layout:</li>
-<li>In Fabric, connect the workspace to that repo/branch (Workspace settings → Git integration) if it is not already connected.</li>
-<li>Sync from Git into the workspace. Fabric creates or updates the pipeline items from the committed <code>*.DataPipeline/</code> folders.</li>
-</ol>
-<p>Pin <code>Pipeline(logical_id=...)</code> when renames must keep the same Fabric identity.</p>
-<p>See <a href="../../concepts/exporting/">Exporting</a> for <code>logicalId</code> and <code>.schedules</code> behavior.</p>
-<h2 id="pair-with-fabric-cicd">Pair with fabric-cicd<a class="headerlink" href="#pair-with-fabric-cicd" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/microsoft/fabric-cicd">fabric-cicd</a> deploys and promotes Fabric items across workspaces. A common split:</p>
+<p>API details: <a href="../../concepts/importing/">Importing</a>.</p>
+<h2 id="fidelity-and-caveats">Fidelity and caveats<a class="headerlink" href="#fidelity-and-caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>This library</strong> authors validated <code>*.DataPipeline/</code> folders (and related content) in Git.</li>
-<li><strong>fabric-cicd</strong> publishes those items into target workspaces as part of a release or environment promotion.</li>
+<li>Round-trip is <strong>semantic</strong>, not byte-identical. Typed models may inject policy defaults that sparse UI exports omit.</li>
+<li>Schedules live in <code>.schedules</code> on item folders; <code>load_item</code> / codegen restore them when present. They are not part of the Items API <code>to_definition()</code> payload.</li>
+<li>Unknown activity types stay as <code>RawActivity</code> until the library models them; unknown connectors use generic types.</li>
 </ul>
-<p>Export on merge (or in a release job), then point fabric-cicd at the folder that contains your item definitions. See also <a href="../ci/">CI with GitHub Actions</a>.</p>
-<h2 id="pair-with-terraform">Pair with Terraform<a class="headerlink" href="#pair-with-terraform" title="Permanent link">&para;</a></h2>
-<p>The <a href="https://registry.terraform.io/providers/microsoft/fabric/latest">Fabric Terraform provider</a> manages workspace resources and item lifecycle. Use this library when you want typed Python to own the <strong>pipeline definition content</strong>, then:</p>
-<ul>
-<li>commit <code>*.DataPipeline/</code> folders and let Git sync apply them, or</li>
-<li>feed <code>Pipeline.to_definition()</code> / exported JSON into whatever workflow you use alongside Terraform-managed capacity, workspaces, and connections.</li>
-</ul>
-<p>Treat Terraform as infra and promotion; treat <code>fabric-data-pipelines</code> as the authoring layer for pipeline JSON.</p>
-<h2 id="rest-items-api">REST Items API<a class="headerlink" href="#rest-items-api" title="Permanent link">&para;</a></h2>
-<p>For scripts or custom deployers that call the Fabric Items API directly:</p>
-<div class="highlight"><pre><span></span><code><span class="n">definition</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">to_definition</span><span class="p">()</span>
-<span class="c1"># definition[&quot;parts&quot;] holds base64 InlineBase64 payloads for</span>
-<span class="c1"># pipeline-content.json and .platform</span>
-</code></pre></div>
-<p>Note: <code>.schedules</code> is written by <code>save_item()</code> for Git item folders; it is not included in the Items API <code>definition</code> payload returned by <code>to_definition()</code>.</p>
+<h2 id="bulk-workspaces">Bulk workspaces<a class="headerlink" href="#bulk-workspaces" title="Permanent link">&para;</a></h2>
+<p><code>load_workspace("out")</code> discovers every <code>*.DataPipeline/</code> folder (recursively by default). The <code>codegen</code> CLI takes a single path per invocation — run it once per item you want as Python source.</p>
 <h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="../migrate/">Migrate from Fabric</a> — UI/Git item folders → typed Python source</li>
-<li><a href="../../concepts/exporting/">Exporting</a> — JSON vs item-folder details</li>
-<li><a href="../ci/">CI with GitHub Actions</a> — validate on PR, export on merge</li>
-<li><a href="../positioning/">How this compares</a> — UI, fabricflow, fabric-cicd, Terraform</li>
+<li><a href="../../concepts/importing/">Importing</a> — <code>from_json</code>, <code>load_item</code>, <code>load_workspace</code></li>
+<li><a href="../../concepts/exporting/">Exporting</a> — JSON vs item-folder output</li>
+<li><a href="../deploy/">Deploy to Fabric</a> — Git sync, fabric-cicd, Terraform</li>
+<li><a href="../../reference/import/">Import reference</a> — public import API</li>
 </ul>
 
 

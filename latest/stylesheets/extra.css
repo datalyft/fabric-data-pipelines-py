@@ -1,0 +1,191 @@
+/* Brand tokens — deep navy with purple accents (Datalyft) */
+:root {
+  --fdp-navy: #000b29;
+  --fdp-navy-deep: #000612;
+  --fdp-navy-elevated: #0a1628;
+  --fdp-purple: #8e2de2;
+  --fdp-purple-bright: #a855f7;
+  --fdp-magenta: #7209b7;
+  --fdp-violet: #6b21a8;
+  --fdp-gradient: linear-gradient(135deg, var(--fdp-purple-bright) 0%, var(--fdp-purple) 50%, var(--fdp-magenta) 100%);
+}
+
+:root > * {
+  --md-primary-fg-color: var(--fdp-navy);
+  --md-primary-fg-color--light: #0d2347;
+  --md-primary-fg-color--dark: var(--fdp-navy-deep);
+  --md-accent-fg-color: var(--fdp-purple-bright);
+  --md-accent-fg-color--transparent: color-mix(in srgb, var(--fdp-purple) 14%, transparent);
+  --md-typeset-a-color: var(--fdp-purple-bright);
+}
+
+/* Dark (default) — slate tuned toward brand navy */
+[data-md-color-scheme="slate"] {
+  --md-hue: 270;
+  --md-default-bg-color: #050b18;
+  --md-default-bg-color--light: #0a1628;
+  --md-default-bg-color--lighter: #121f36;
+  --md-default-bg-color--lightest: #1a2a45;
+  --md-code-bg-color: #0a1220;
+  --md-footer-bg-color: var(--fdp-navy-deep);
+  --md-footer-bg-color--dark: #000408;
+  --md-typeset-a-color: var(--fdp-purple-bright);
+}
+
+/* Light mode keeps purple accents without fighting readability */
+[data-md-color-scheme="default"] {
+  --md-typeset-a-color: var(--fdp-magenta);
+  --md-accent-fg-color: var(--fdp-magenta);
+}
+
+/* Header: navy bar with subtle purple edge */
+.md-header {
+  background-color: var(--fdp-navy);
+  box-shadow: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--fdp-purple) 28%, transparent);
+}
+
+.md-tabs {
+  background-color: var(--fdp-navy);
+  border-bottom: 1px solid color-mix(in srgb, var(--fdp-purple) 18%, transparent);
+}
+
+.md-tabs__link--active,
+.md-tabs__link:focus,
+.md-tabs__link:hover {
+  color: var(--fdp-purple-bright);
+}
+
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.8rem;
+  width: auto;
+  border-radius: 0.35rem;
+}
+
+/* Soft brand glow on the active nav indicator */
+.md-nav__link--active > .md-ellipsis,
+.md-nav__item .md-nav__link--active {
+  color: var(--fdp-purple-bright);
+}
+
+/* Buttons / CTAs */
+.md-typeset .md-button {
+  border-radius: 0.4rem;
+  border-color: color-mix(in srgb, var(--fdp-purple) 55%, transparent);
+  color: var(--fdp-purple-bright);
+}
+
+.md-typeset .md-button--primary {
+  background: var(--fdp-gradient);
+  border: none;
+  color: #fff;
+  box-shadow: 0 0 24px color-mix(in srgb, var(--fdp-purple) 30%, transparent);
+}
+
+.md-typeset .md-button--primary:hover,
+.md-typeset .md-button--primary:focus {
+  filter: brightness(1.08);
+  color: #fff;
+}
+
+/* Code blocks: navy surface, purple accents */
+.md-typeset pre > code {
+  border: 1px solid color-mix(in srgb, var(--fdp-purple) 14%, transparent);
+  border-radius: 0.45rem;
+}
+
+.md-typeset .highlight .filename {
+  border-top-left-radius: 0.45rem;
+  border-top-right-radius: 0.45rem;
+}
+
+/* Tabbed content underline uses brand accent */
+.md-typeset .tabbed-labels > label:hover,
+.md-typeset .tabbed-set > input:checked + label {
+  color: var(--fdp-purple-bright);
+}
+
+.md-typeset .tabbed-labels > label::after {
+  background: var(--fdp-gradient);
+}
+
+/* Admonitions: purple accents */
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+  border-color: var(--fdp-purple-bright);
+}
+
+.md-typeset .tip > .admonition-title,
+.md-typeset .tip > summary {
+  background-color: color-mix(in srgb, var(--fdp-purple) 14%, transparent);
+}
+
+.md-typeset .admonition.note,
+.md-typeset details.note {
+  border-color: var(--fdp-magenta);
+}
+
+.md-typeset .note > .admonition-title,
+.md-typeset .note > summary {
+  background-color: color-mix(in srgb, var(--fdp-magenta) 14%, transparent);
+}
+
+/* Homepage hero banner */
+.fdp-hero {
+  margin: 0 0 1.75rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--fdp-purple) 22%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--fdp-magenta) 12%, transparent),
+    0 18px 48px color-mix(in srgb, var(--fdp-navy) 55%, transparent);
+  background: var(--fdp-navy);
+}
+
+.fdp-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+.fdp-tagline {
+  margin-top: -0.25rem;
+  margin-bottom: 1.5rem;
+  color: color-mix(in srgb, var(--md-default-fg-color) 72%, transparent);
+  font-size: 1.05rem;
+}
+
+.fdp-sponsor {
+  margin: 1.75rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid color-mix(in srgb, var(--fdp-purple) 18%, transparent);
+  color: color-mix(in srgb, var(--md-default-fg-color) 68%, transparent);
+  font-size: 0.95rem;
+}
+
+.fdp-sponsor a {
+  font-weight: 600;
+}
+
+/* Search highlight */
+.md-search-result mark {
+  color: var(--fdp-purple-bright);
+  background-color: color-mix(in srgb, var(--fdp-purple) 18%, transparent);
+  box-shadow: none;
+}
+
+/* Content links hover */
+.md-typeset a:hover {
+  color: color-mix(in srgb, var(--fdp-purple-bright) 70%, white);
+}
+
+[data-md-color-scheme="default"] .md-typeset a:hover {
+  color: color-mix(in srgb, var(--fdp-magenta) 70%, black);
+}
+
+/* Footer polish */
+.md-footer-meta {
+  background-color: var(--fdp-navy-deep);
+}
