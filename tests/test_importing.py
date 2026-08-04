@@ -210,9 +210,8 @@ def test_lookup_connection_settings_and_empty_schema_object() -> None:
     assert activity.dataset_settings.schema_ == []
     assert activity.dataset_settings.connection_settings is not None
     assert activity.dataset_settings.connection_settings.name == "lakehouse_platform_monitoring"
-    assert (
-        activity.dataset_settings.connection_settings.properties.external_references is not None
-    )
+    assert activity.dataset_settings.connection_settings.properties.external_references is not None
+
     exported = activity.to_dict()
     ds = exported["typeProperties"]["datasetSettings"]
     assert ds["schema"] == []
