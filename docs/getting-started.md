@@ -70,6 +70,7 @@ uv run python examples/scheduled_gold_refresh.py
 ## Next steps
 
 - Read [Deploy to Fabric](guides/deploy.md) to close the loop with Git sync (and fabric-cicd / Terraform).
+- Read [Migrate from Fabric](guides/migrate.md) if you already have UI or Git-synced pipelines.
 - Read [Dependencies](concepts/dependencies.md) to model orchestration flows.
 - Read [Expressions](concepts/expressions.md) to build dynamic Fabric expressions.
 - Read [Scheduling](guides/scheduling.md) to generate `.schedules`.

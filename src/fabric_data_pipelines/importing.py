@@ -128,6 +128,7 @@ def parse_dataset(raw: dict[str, Any]) -> DatasetSettings:
         schema_=list(base.schema_),
         external_references=base.external_references,
         linked_service=base.linked_service,
+        connection_settings=base.connection_settings,
         parameters=base.parameters,
         description=base.description,
     )

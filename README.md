@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/assets/featured.jpg" alt="fabric-data-pipelines" width="720" />
+</p>
+
 # fabric-data-pipelines
 
 [![PyPI](https://img.shields.io/pypi/v/fabric-data-pipelines)](https://pypi.org/project/fabric-data-pipelines/)
@@ -6,8 +10,6 @@
 [![Downloads](https://img.shields.io/pypi/dm/fabric-data-pipelines)](https://pypi.org/project/fabric-data-pipelines/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Docs](https://img.shields.io/badge/docs-fabric--data--pipelines.datalyft.io-blue)](https://fabric-data-pipelines.datalyft.io/latest/)
-
-**Docs:** [fabric-data-pipelines.datalyft.io](https://fabric-data-pipelines.datalyft.io/latest)
 
 `fabric-data-pipelines` is a Python library for authoring [Microsoft Fabric](https://learn.microsoft.com/fabric) data pipelines as code.
 
@@ -31,6 +33,7 @@ Typical users are data engineers, analytics engineers, and platform teams buildi
 - Typed activities instead of manually building nested Fabric payloads
 - Readable dependency helpers like `.then()`, `.after()`, and `>>`
 - Expression helpers for parameters, activity outputs, run metadata, and interpolation
+- Import existing Fabric Git items or JSON, and generate Python with `fabric-data-pipelines codegen`
 - First-class support for Fabric Git item folders, including `.platform` and `.schedules`
 - Validation of dependency graphs before serialization
 - An escape hatch via `RawActivity` when Fabric supports something not modeled yet
@@ -243,6 +246,16 @@ This package generates those files for you, including schedule configuration whe
 
 Commit the folders into a Git-connected Fabric workspace and sync — see [Deploy to Fabric](https://fabric-data-pipelines.datalyft.io/latest/guides/deploy/). For validate-on-PR / export-on-merge, see [CI with GitHub Actions](https://fabric-data-pipelines.datalyft.io/latest/guides/ci/).
 
+## Migrate from Fabric UI / Git
+
+Already have pipelines in the portal or a Git-synced `*.DataPipeline/` folder? Generate reviewable Python, edit it as the source of truth, then re-export:
+
+```bash
+fabric-data-pipelines codegen path/to/Item.DataPipeline -o pipeline.py
+```
+
+Review the output (modeled types plus `RawActivity` for anything not modeled yet), edit in Python, call `save_item`, and sync via Git. Full walkthrough: [Migrate from Fabric](https://fabric-data-pipelines.datalyft.io/latest/guides/migrate/).
+
 ## How this compares
 
 | Tool | Role vs this library |
@@ -376,3 +389,7 @@ Maintainer notes (releases, Amplify docs hosting): [`maintainers/`](maintainers/
 ## License
 
 MIT
+
+## Sponsors
+
+This project is sponsored by [datalyft](https://datalyft.io).

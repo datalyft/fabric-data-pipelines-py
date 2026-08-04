@@ -4,7 +4,7 @@ Short answer: this library **authors** typed, validated pipeline definitions (JS
 
 ## Fabric UI + Git integration
 
-The Fabric portal is the right place to explore activities, debug a single run, and learn the product. Git integration already lets you version `*.DataPipeline/` folders. What the UI does not give you is a typed, reviewable authoring experience in Python: dependency helpers, expression builders, and graph validation before anything hits the workspace. Use the UI to discover; use this library when pipelines are product code.
+The Fabric portal is the right place to explore activities, debug a single run, and learn the product. Git integration already lets you version `*.DataPipeline/` folders. What the UI does not give you is a typed, reviewable authoring experience in Python: dependency helpers, expression builders, and graph validation before anything hits the workspace. Use the UI to discover; use this library when pipelines are product code. Coming from the UI or an existing Git item folder? See [Migrate from Fabric](migrate.md).
 
 ## fabricflow
 

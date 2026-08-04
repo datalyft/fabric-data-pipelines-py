@@ -4,22 +4,23 @@ from __future__ import annotations
 
 from typing import Any
 
-from pydantic import Field, PrivateAttr, model_serializer
+from pydantic import Field, PrivateAttr, field_validator, model_serializer
 
 from fabric_data_pipelines.activities.base import ExternalReferences
 from fabric_data_pipelines.serialization import FabricModel
 
 
 class LinkedServiceProperties(FabricModel):
-    """Inner ``properties`` block of a Fabric linked service reference."""
+    """Inner ``properties`` block of a Fabric linked service / connection reference."""
 
     type: str
     type_properties: dict[str, Any] = Field(default_factory=dict)
     annotations: list[Any] = Field(default_factory=list)
+    external_references: ExternalReferences | None = None
 
 
 class LinkedService(FabricModel):
-    """A named linked service embedded in dataset settings.
+    """A named linked service or connectionSettings embedded in dataset settings.
 
     Example::
 
@@ -44,7 +45,8 @@ class DatasetSettings(FabricModel):
     """Base dataset settings with Fabric UI boilerplate.
 
     Always emits ``annotations: []`` and ``schema: []`` so generated JSON
-    matches Fabric UI exports.
+    matches Fabric UI exports. Fabric sometimes exports an empty schema as
+    ``{}``; that is normalized to ``[]`` on import.
     """
 
     type: str
@@ -53,8 +55,17 @@ class DatasetSettings(FabricModel):
     schema_: list[Any] = Field(default_factory=list, alias="schema")
     external_references: ExternalReferences | None = None
     linked_service: LinkedService | None = None
+    connection_settings: LinkedService | None = None
     parameters: dict[str, Any] | None = None
     description: str | None = None
+
+    @field_validator("schema_", mode="before")
+    @classmethod
+    def _coerce_empty_schema_object(cls, value: Any) -> Any:
+        # Fabric UI occasionally emits ``"schema": {}`` instead of ``[]``.
+        if isinstance(value, dict) and not value:
+            return []
+        return value
 
     @model_serializer(mode="wrap")
     def _serialize(self, handler: Any) -> dict[str, Any]:
@@ -71,6 +82,10 @@ class DatasetSettings(FabricModel):
             )
         if self.linked_service is not None:
             data["linkedService"] = self.linked_service.model_dump(
+                by_alias=True, exclude_none=True, mode="json"
+            )
+        if self.connection_settings is not None:
+            data["connectionSettings"] = self.connection_settings.model_dump(
                 by_alias=True, exclude_none=True, mode="json"
             )
         if self.parameters is not None:

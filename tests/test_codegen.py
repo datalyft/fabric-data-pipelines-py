@@ -70,6 +70,55 @@ def test_codegen_preserves_raw_activity(tmp_path: Path) -> None:
     assert_json_equal(generated.to_dict(), snap)
 
 
+def test_codegen_preserves_copy_source_extras() -> None:
+    from fabric_data_pipelines import CopySource, Dataset, Lookup, parse_activity
+
+    activity = parse_activity(
+        {
+            "name": "Get notebook output",
+            "type": "Lookup",
+            "dependsOn": [],
+            "typeProperties": {
+                "source": {
+                    "type": "JsonSource",
+                    "storeSettings": {"type": "LakehouseReadSettings", "recursive": True},
+                    "formatSettings": {"type": "JsonReadSettings"},
+                },
+                "datasetSettings": {
+                    "type": "Json",
+                    "annotations": [],
+                    "schema": {},
+                    "typeProperties": {"location": {"type": "LakehouseLocation"}},
+                    "connectionSettings": {
+                        "name": "lh",
+                        "properties": {
+                            "type": "Lakehouse",
+                            "annotations": [],
+                            "typeProperties": {"rootFolder": "Files"},
+                        },
+                    },
+                },
+            },
+        }
+    )
+    assert isinstance(activity, Lookup)
+    pipeline = Pipeline(name="extras", activities=[activity])
+    source = codegen_pipeline(pipeline)
+    assert "storeSettings=" in source
+    assert "formatSettings=" in source
+    assert "connection_settings=" in source
+
+    namespace: dict[str, object] = {}
+    exec(compile(source, "<codegen>", "exec"), namespace)
+    generated = namespace["pipeline"]
+    assert isinstance(generated, Pipeline)
+    lookup = generated.activities[0]
+    assert isinstance(lookup, Lookup)
+    assert isinstance(lookup.source, CopySource)
+    assert isinstance(lookup.dataset_settings, Dataset)
+    assert_json_equal(generated.to_dict(), pipeline.to_dict())
+
+
 def test_codegen_schedules_use_public_aliases() -> None:
     from fabric_data_pipelines import Schedule, Weekly
 
