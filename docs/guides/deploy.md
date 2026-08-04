@@ -55,6 +55,7 @@ Note: `.schedules` is written by `save_item()` for Git item folders; it is not i
 
 ## Next steps
 
+- [Migrate from Fabric](migrate.md) — UI/Git item folders → typed Python source
 - [Exporting](../concepts/exporting.md) — JSON vs item-folder details
 - [CI with GitHub Actions](ci.md) — validate on PR, export on merge
 - [How this compares](positioning.md) — UI, fabricflow, fabric-cicd, Terraform

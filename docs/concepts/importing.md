@@ -48,3 +48,5 @@ fabric-data-pipelines codegen path/to/pipeline-content.json --name MyPipeline -o
 ```
 
 The CLI emits reviewable constructors for modeled types and `RawActivity(...)` for the rest. See [Exporting](exporting.md) for the write path.
+
+For the end-to-end UI/Git → Python → re-export workflow, see [Migrate from Fabric](../guides/migrate.md).
