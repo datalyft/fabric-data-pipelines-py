@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
+
 
 class PipelineValidationError(ValueError):
     """Base class for pipeline validation failures."""
@@ -51,6 +53,45 @@ class CrossScopeDependencyError(PipelineValidationError):
 
 class ScheduleValidationError(PipelineValidationError):
     """Raised when constructing a Fabric pipeline schedule fails validation."""
+
+
+class InvalidChoiceError(PipelineValidationError):
+    """Raised when a value is not in a known finite set of allowed choices.
+
+    Example message::
+
+        Unknown dataset 'LakehouseTable' for source 'SqlMISource'. Valid
+        datasets: `AzureSqlMITable`, `AzureSqlTable`.
+    """
+
+    def __init__(
+        self,
+        *,
+        field: str,
+        value: str,
+        valid: Sequence[str],
+        context: str | None = None,
+    ) -> None:
+        self.field = field
+        self.value = value
+        self.valid = tuple(valid)
+        self.context = context
+        super().__init__(
+            format_invalid_choice(field=field, value=value, valid=valid, context=context)
+        )
+
+
+def format_invalid_choice(
+    *,
+    field: str,
+    value: str,
+    valid: Sequence[str],
+    context: str | None = None,
+) -> str:
+    """Build a rejection message that enumerates the allowed choices."""
+    ctx = context or ""
+    choices = ", ".join(f"`{item}`" for item in valid)
+    return f"Unknown {field} '{value}'{ctx}. Valid {field}s: {choices}."
 
 
 class PipelineImportError(ValueError):

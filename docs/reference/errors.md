@@ -14,4 +14,6 @@ Validation and import exceptions raised by the library.
 
 ::: fabric_data_pipelines.ScheduleValidationError
 
+::: fabric_data_pipelines.InvalidChoiceError
+
 ::: fabric_data_pipelines.PipelineImportError

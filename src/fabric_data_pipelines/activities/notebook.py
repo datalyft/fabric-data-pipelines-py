@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from typing import Any, ClassVar
 
-from pydantic import Field
+from pydantic import Field, model_validator
 
 from fabric_data_pipelines.activities.base import Activity, ActivityPolicy
+from fabric_data_pipelines.activities.checks import require_non_empty_str
 
 
 class Notebook(Activity):
@@ -34,3 +35,9 @@ class Notebook(Activity):
     session_tag: str | None = None
 
     policy: ActivityPolicy | None = Field(default_factory=ActivityPolicy)
+
+    @model_validator(mode="after")
+    def _validate_notebook(self) -> Notebook:
+        require_non_empty_str(self.notebook_id, field="notebook_id")
+        require_non_empty_str(self.workspace_id, field="workspace_id")
+        return self

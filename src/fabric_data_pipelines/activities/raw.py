@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from typing import Any, ClassVar
 
-from pydantic import Field
+from pydantic import Field, model_validator
 
 from fabric_data_pipelines.activities.base import Activity
+from fabric_data_pipelines.activities.checks import require_non_empty_str
 
 
 class RawActivity(Activity):
@@ -35,3 +36,8 @@ class RawActivity(Activity):
 
     type: str
     type_properties: dict[str, Any] = Field(default_factory=dict)
+
+    @model_validator(mode="after")
+    def _validate_raw(self) -> RawActivity:
+        require_non_empty_str(self.type, field="type")
+        return self
