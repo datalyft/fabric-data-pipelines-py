@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0](https://github.com/datalyft/fabric-data-pipelines/releases/tag/v0.3.0) - 2026-08-09
+
+### Added
+
+- Validation: `InvalidChoiceError` for finite choice rejections that list the allowed values ([#7](https://github.com/datalyft/fabric-data-pipelines/issues/7)).
+- Validation: Construction-time activity validation on `Activity` and every activity subclass (required fields, control-flow bodies, Copy sink/staging, connector↔dataset pairing for known types, and related invariants) ([#6](https://github.com/datalyft/fabric-data-pipelines/issues/6)).
+
+### Changed
+
+- **Breaking:** previously accepted invalid activity shapes now fail at construction and on import (for example Copy without sink, mismatched known connector/dataset pairs, empty `ForEach`/`Until` bodies, `Script` without a connection). Unknown connector/dataset types and `RawActivity` remain escape hatches. Graph checks via `validate_graph()` are unchanged.
+
 ## [0.2.2](https://github.com/datalyft/fabric-data-pipelines/releases/tag/v0.2.2) - 2026-08-03
 
 ### Added

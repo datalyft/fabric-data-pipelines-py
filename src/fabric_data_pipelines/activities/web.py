@@ -4,11 +4,15 @@ from __future__ import annotations
 
 from typing import Any, ClassVar, Literal
 
-from pydantic import Field
+from pydantic import Field, model_validator
 
 from fabric_data_pipelines.activities.base import Activity, ActivityPolicy, ExternalReferences
+from fabric_data_pipelines.activities.checks import require_non_empty_str
+from fabric_data_pipelines.errors import PipelineValidationError
 
 HttpMethod = Literal["GET", "POST", "PUT", "PATCH", "DELETE"]
+_METHODS_REQUIRING_BODY: frozenset[str] = frozenset({"POST", "PUT", "PATCH"})
+_METHODS_FORBIDDING_BODY: frozenset[str] = frozenset({"GET", "DELETE"})
 
 
 class Web(Activity):
@@ -45,3 +49,20 @@ class Web(Activity):
 
     external_references: ExternalReferences
     policy: ActivityPolicy | None = Field(default_factory=ActivityPolicy)
+
+    @model_validator(mode="after")
+    def _validate_web(self) -> Web:
+        require_non_empty_str(self.relative_url, field="relative_url")
+        require_non_empty_str(
+            self.external_references.connection,
+            field="external_references.connection",
+        )
+        if self.method in _METHODS_REQUIRING_BODY and self.body is None:
+            raise PipelineValidationError(
+                f"Web activity '{self.name}' method '{self.method}' requires body"
+            )
+        if self.method in _METHODS_FORBIDDING_BODY and self.body is not None:
+            raise PipelineValidationError(
+                f"Web activity '{self.name}' method '{self.method}' must not set body"
+            )
+        return self

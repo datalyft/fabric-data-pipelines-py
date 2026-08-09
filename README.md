@@ -347,6 +347,8 @@ pipeline.save_item("out")
 
 ### Validation
 
+Activity models validate at construction (and on import): required fields, control-flow body rules, Copy sink/staging invariants, connector↔dataset pairing for known types, and similar per-activity checks. Finite choice rejections use `InvalidChoiceError` and list the allowed values (Pydantic surfaces these as `ValidationError` with that message). Unknown connector/dataset types and `RawActivity` remain escape hatches.
+
 `Pipeline.to_json()` and `Pipeline.save()` call `validate_graph()` before serializing. That catches:
 
 - duplicate activity names, including nested scopes

@@ -4,9 +4,11 @@ from __future__ import annotations
 
 from typing import Any, ClassVar
 
-from pydantic import Field
+from pydantic import Field, model_validator
 
 from fabric_data_pipelines.activities.base import Activity, SecureInputOutputPolicy
+from fabric_data_pipelines.activities.checks import require_non_empty_str
+from fabric_data_pipelines.errors import PipelineValidationError
 from fabric_data_pipelines.serialization import FabricModel
 
 
@@ -47,3 +49,19 @@ class ExecutePipeline(Activity):
     policy: SecureInputOutputPolicy | None = Field(
         default_factory=lambda: SecureInputOutputPolicy(secure_input=False)
     )
+
+    @model_validator(mode="after")
+    def _validate_execute_pipeline(self) -> ExecutePipeline:
+        if isinstance(self.pipeline, PipelineReference):
+            require_non_empty_str(self.pipeline.reference_name, field="pipeline.reference_name")
+            return self
+        if isinstance(self.pipeline, dict):
+            ref = self.pipeline.get("referenceName", self.pipeline.get("reference_name"))
+            if not isinstance(ref, str) or not ref.strip():
+                raise PipelineValidationError(
+                    f"ExecutePipeline activity '{self.name}' requires pipeline.reference_name"
+                )
+            return self
+        raise PipelineValidationError(
+            f"ExecutePipeline activity '{self.name}' pipeline must be a PipelineReference or dict"
+        )

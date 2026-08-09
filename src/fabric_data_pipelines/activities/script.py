@@ -4,9 +4,11 @@ from __future__ import annotations
 
 from typing import Any, ClassVar, Literal
 
-from pydantic import Field, field_validator, model_serializer
+from pydantic import Field, field_validator, model_serializer, model_validator
 
 from fabric_data_pipelines.activities.base import Activity, ActivityPolicy
+from fabric_data_pipelines.activities.checks import require_expression_value
+from fabric_data_pipelines.errors import PipelineValidationError
 from fabric_data_pipelines.serialization import Expression, FabricModel
 
 ScriptBlockType = Literal["Query", "NonQuery"]
@@ -92,3 +94,24 @@ class Script(Activity):
     connection_version: str | None = None
 
     policy: ActivityPolicy | None = Field(default_factory=ActivityPolicy)
+
+    @model_validator(mode="after")
+    def _validate_script(self) -> Script:
+        if not self.scripts:
+            raise PipelineValidationError(
+                f"Script activity '{self.name}' requires a non-empty scripts list"
+            )
+        for i, block in enumerate(self.scripts):
+            if isinstance(block, ScriptBlock):
+                require_expression_value(block.text, field=f"scripts[{i}].text")
+            elif isinstance(block, dict):
+                require_expression_value(block.get("text"), field=f"scripts[{i}].text")
+            else:
+                raise PipelineValidationError(
+                    f"Script activity '{self.name}' scripts[{i}] must be a ScriptBlock or dict"
+                )
+        if self.external_references is None or not self.external_references.connection.strip():
+            raise PipelineValidationError(
+                f"Script activity '{self.name}' requires external_references.connection"
+            )
+        return self

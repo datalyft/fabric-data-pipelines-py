@@ -4,14 +4,59 @@ from __future__ import annotations
 
 from typing import Any, ClassVar
 
-from pydantic import ConfigDict, Field, field_validator, model_serializer
+from pydantic import ConfigDict, Field, field_validator, model_serializer, model_validator
 
 from fabric_data_pipelines.activities.base import Activity, ActivityPolicy, ExternalReferences
+from fabric_data_pipelines.activities.checks import get_dataset_settings, get_type_name
 from fabric_data_pipelines.activities.datasets import DatasetSettings
+from fabric_data_pipelines.errors import InvalidChoiceError, PipelineValidationError
 from fabric_data_pipelines.serialization import Expression, FabricModel, to_camel
 
 # Fabric emits sqlReaderQuery as a plain string or an Expression object.
 SqlReaderQuery = Expression | str | dict[str, Any]
+
+# Known connector → allowed dataset types. Unknown types skip pairing (escape hatch).
+CONNECTOR_DATASETS: dict[str, tuple[str, ...]] = {
+    "SqlMISource": ("AzureSqlMITable", "AzureSqlTable"),
+    "SqlMISink": ("AzureSqlMITable", "AzureSqlTable"),
+    "LakehouseTableSource": ("LakehouseTable",),
+    "LakehouseTableSink": ("LakehouseTable",),
+    "DataWarehouseSource": ("DataWarehouseTable",),
+    "DataWarehouseSink": ("DataWarehouseTable",),
+}
+_KNOWN_DATASETS: frozenset[str] = frozenset(
+    dataset for datasets in CONNECTOR_DATASETS.values() for dataset in datasets
+)
+
+
+def check_connector_dataset(
+    connector: Any,
+    *,
+    dataset: Any = None,
+    role: str,
+) -> None:
+    """Reject known connector/dataset pairs that Fabric will not accept.
+
+    Skips when the connector or dataset ``type`` is unknown so generic escape
+    hatches keep working.
+    """
+    connector_type = get_type_name(connector)
+    if connector_type is None or connector_type not in CONNECTOR_DATASETS:
+        return
+    ds = dataset if dataset is not None else get_dataset_settings(connector)
+    if ds is None:
+        return
+    dataset_type = get_type_name(ds)
+    if dataset_type is None or dataset_type not in _KNOWN_DATASETS:
+        return
+    allowed = CONNECTOR_DATASETS[connector_type]
+    if dataset_type not in allowed:
+        raise InvalidChoiceError(
+            field="dataset",
+            value=dataset_type,
+            valid=allowed,
+            context=f" for {role}",
+        )
 
 
 def _coerce_sql_reader_query(value: Any) -> Any:
@@ -254,3 +299,38 @@ class Copy(Activity):
     enable_skip_incompatible_row: bool | None = None
 
     policy: ActivityPolicy | None = Field(default_factory=ActivityPolicy)
+
+    @model_validator(mode="after")
+    def _validate_copy(self) -> Copy:
+        if self.sink is None and self.destination is None:
+            raise PipelineValidationError(
+                f"Copy activity '{self.name}' requires sink or destination"
+            )
+        if self.sink is not None and self.destination is not None:
+            raise PipelineValidationError(
+                f"Copy activity '{self.name}' must set only one of sink or destination"
+            )
+        if self.enable_staging is True and self.staging_settings is None:
+            raise PipelineValidationError(
+                f"Copy activity '{self.name}' has enable_staging=True "
+                "but staging_settings is missing"
+            )
+        if self.enable_staging is not True and self.staging_settings is not None:
+            raise PipelineValidationError(
+                f"Copy activity '{self.name}' has staging_settings but enable_staging is not True"
+            )
+        if self.parallel_copies is not None and self.parallel_copies <= 0:
+            raise PipelineValidationError(
+                f"Copy activity '{self.name}' parallel_copies must be > 0"
+            )
+        if self.data_integration_units is not None and self.data_integration_units <= 0:
+            raise PipelineValidationError(
+                f"Copy activity '{self.name}' data_integration_units must be > 0"
+            )
+
+        source_type = get_type_name(self.source) or "source"
+        check_connector_dataset(self.source, role=f"source '{source_type}'")
+        target = self.sink if self.sink is not None else self.destination
+        target_type = get_type_name(target) or "sink"
+        check_connector_dataset(target, role=f"sink '{target_type}'")
+        return self

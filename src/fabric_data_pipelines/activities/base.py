@@ -4,8 +4,10 @@ from __future__ import annotations
 
 from typing import Any, ClassVar, Literal, TypeVar
 
-from pydantic import Field, model_serializer
+from pydantic import Field, model_serializer, model_validator
 
+from fabric_data_pipelines.activities.checks import require_non_empty_str
+from fabric_data_pipelines.errors import PipelineValidationError
 from fabric_data_pipelines.serialization import FabricModel, to_camel
 
 DependencyCondition = Literal["Succeeded", "Failed", "Completed", "Skipped"]
@@ -113,6 +115,36 @@ class Activity(FabricModel):
     on_inactive_mark_as: OnInactiveMarkAs | None = None
     description: str | None = None
     user_properties: list[Any] | None = None
+
+    @model_validator(mode="after")
+    def _validate_activity(self) -> Activity:
+        require_non_empty_str(self.name, field="name")
+        for dep in self.depends_on:
+            require_non_empty_str(dep.activity, field="depends_on.activity")
+            if not dep.dependency_conditions:
+                raise PipelineValidationError(
+                    f"Activity '{self.name}' has a dependsOn entry with empty dependencyConditions"
+                )
+        if self.state == "InActive" and self.on_inactive_mark_as is None:
+            raise PipelineValidationError(
+                f"Activity '{self.name}' has state 'InActive' but on_inactive_mark_as is not set"
+            )
+        if isinstance(self.policy, ActivityPolicy):
+            if self.policy.retry is not None and self.policy.retry < 0:
+                raise PipelineValidationError(f"Activity '{self.name}' policy.retry must be >= 0")
+            if (
+                self.policy.retry_interval_in_seconds is not None
+                and self.policy.retry_interval_in_seconds < 0
+            ):
+                raise PipelineValidationError(
+                    f"Activity '{self.name}' policy.retry_interval_in_seconds must be >= 0"
+                )
+        if self.external_references is not None:
+            require_non_empty_str(
+                self.external_references.connection,
+                field="external_references.connection",
+            )
+        return self
 
     def then(self, activity: A, on: DependencyCondition = "Succeeded") -> A:
         """Chain ``activity`` to run after this one.

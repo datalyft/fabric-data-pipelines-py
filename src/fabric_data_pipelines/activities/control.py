@@ -4,9 +4,11 @@ from __future__ import annotations
 
 from typing import Any, ClassVar
 
-from pydantic import Field, field_validator
+from pydantic import Field, field_validator, model_validator
 
 from fabric_data_pipelines.activities.base import Activity
+from fabric_data_pipelines.activities.checks import require_expression_value, require_non_empty_str
+from fabric_data_pipelines.errors import PipelineValidationError
 from fabric_data_pipelines.serialization import Expression, FabricModel
 
 
@@ -46,6 +48,11 @@ class IfCondition(Activity):
     def _expression(cls, value: Any) -> Any:
         return _coerce_expression(value)
 
+    @model_validator(mode="after")
+    def _validate_if_condition(self) -> IfCondition:
+        require_expression_value(self.expression, field="expression")
+        return self
+
 
 class ForEach(Activity):
     """Iterate over a collection and run nested activities for each item.
@@ -73,6 +80,17 @@ class ForEach(Activity):
     @classmethod
     def _items(cls, value: Any) -> Any:
         return _coerce_expression(value)
+
+    @model_validator(mode="after")
+    def _validate_foreach(self) -> ForEach:
+        require_expression_value(self.items, field="items")
+        if not self.activities:
+            raise PipelineValidationError(
+                f"ForEach activity '{self.name}' requires a non-empty activities list"
+            )
+        if self.batch_count is not None and self.batch_count <= 0:
+            raise PipelineValidationError(f"ForEach activity '{self.name}' batch_count must be > 0")
+        return self
 
 
 class SwitchCase(FabricModel):
@@ -116,6 +134,23 @@ class Switch(Activity):
     def _on(cls, value: Any) -> Any:
         return _coerce_expression(value)
 
+    @model_validator(mode="after")
+    def _validate_switch(self) -> Switch:
+        require_expression_value(self.on, field="on")
+        if not self.cases and not self.default_activities:
+            raise PipelineValidationError(
+                f"Switch activity '{self.name}' requires at least one case or default_activities"
+            )
+        seen: set[str] = set()
+        for case in self.cases:
+            require_non_empty_str(case.value, field="cases.value")
+            if case.value in seen:
+                raise PipelineValidationError(
+                    f"Switch activity '{self.name}' has duplicate case value '{case.value}'"
+                )
+            seen.add(case.value)
+        return self
+
 
 class Until(Activity):
     """Repeat nested activities until an expression evaluates to true.
@@ -143,6 +178,15 @@ class Until(Activity):
     def _expression(cls, value: Any) -> Any:
         return _coerce_expression(value)
 
+    @model_validator(mode="after")
+    def _validate_until(self) -> Until:
+        require_expression_value(self.expression, field="expression")
+        if not self.activities:
+            raise PipelineValidationError(
+                f"Until activity '{self.name}' requires a non-empty activities list"
+            )
+        return self
+
 
 class Wait(Activity):
     """Pause pipeline execution for a number of seconds.
@@ -160,6 +204,14 @@ class Wait(Activity):
 
     wait_time_in_seconds: int
 
+    @model_validator(mode="after")
+    def _validate_wait(self) -> Wait:
+        if self.wait_time_in_seconds < 0:
+            raise PipelineValidationError(
+                f"Wait activity '{self.name}' wait_time_in_seconds must be >= 0"
+            )
+        return self
+
 
 class Fail(Activity):
     """Explicitly fail the pipeline with a message and error code.
@@ -175,3 +227,9 @@ class Fail(Activity):
 
     message: str
     error_code: str
+
+    @model_validator(mode="after")
+    def _validate_fail(self) -> Fail:
+        require_non_empty_str(self.message, field="message")
+        require_non_empty_str(self.error_code, field="error_code")
+        return self
